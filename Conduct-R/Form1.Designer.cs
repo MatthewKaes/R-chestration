@@ -230,7 +230,7 @@
       this.MainMenuStrip = this.menuStrip1;
       this.MinimumSize = new System.Drawing.Size(788, 550);
       this.Name = "Form1";
-      this.Text = "Form1";
+      this.Text = "Conduct-R";
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).EndInit();
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
