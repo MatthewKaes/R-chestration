@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RChestration.Utilities
 {
-  class DataFrameProcessor
+  public class DataFrameProcessor
   {
     static public Dictionary<string, List<string>> LoadDataFrame(string csvTarget)
     {

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "R-chestration", "R-chestrat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{A9679847-9938-4427-83E5-5ADB69684C34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Conduct-R", "Conduct-R\Conduct-R.csproj", "{D0FF6148-4C0C-46CF-9E5A-B2467112F1F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A9679847-9938-4427-83E5-5ADB69684C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9679847-9938-4427-83E5-5ADB69684C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9679847-9938-4427-83E5-5ADB69684C34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0FF6148-4C0C-46CF-9E5A-B2467112F1F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0FF6148-4C0C-46CF-9E5A-B2467112F1F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0FF6148-4C0C-46CF-9E5A-B2467112F1F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0FF6148-4C0C-46CF-9E5A-B2467112F1F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
