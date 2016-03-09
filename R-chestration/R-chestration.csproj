@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataFrameProcessor.cs" />
+    <Compile Include="DataTranslator.cs" />
     <Compile Include="Rchestrator.cs" />
   </ItemGroup>
   <ItemGroup>
