@@ -39,16 +39,21 @@
       this.openDataframeDialog = new System.Windows.Forms.OpenFileDialog();
       this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.groupBox2 = new System.Windows.Forms.GroupBox();
+      this.trendLine = new System.Windows.Forms.CheckBox();
+      this.confidenceInterval = new System.Windows.Forms.CheckBox();
       this.label3 = new System.Windows.Forms.Label();
       this.elementSizeTrack = new System.Windows.Forms.TrackBar();
       this.graphDesign = new System.Windows.Forms.ComboBox();
       this.label2 = new System.Windows.Forms.Label();
-      this.confidenceInterval = new System.Windows.Forms.CheckBox();
+      this.groupBox3 = new System.Windows.Forms.GroupBox();
+      this.modelSelect = new System.Windows.Forms.ComboBox();
+      this.label5 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.elementSizeTrack)).BeginInit();
+      this.groupBox3.SuspendLayout();
       this.SuspendLayout();
       // 
       // graphTarget
@@ -76,6 +81,7 @@
       this.dataFrameHeader1.Size = new System.Drawing.Size(188, 21);
       this.dataFrameHeader1.Sorted = true;
       this.dataFrameHeader1.TabIndex = 2;
+      this.dataFrameHeader1.SelectedIndexChanged += new System.EventHandler(this.dataFrameHeader1_SelectedIndexChanged);
       // 
       // label1
       // 
@@ -148,6 +154,7 @@
       // 
       // groupBox2
       // 
+      this.groupBox2.Controls.Add(this.trendLine);
       this.groupBox2.Controls.Add(this.confidenceInterval);
       this.groupBox2.Controls.Add(this.label3);
       this.groupBox2.Controls.Add(this.elementSizeTrack);
@@ -159,6 +166,28 @@
       this.groupBox2.TabIndex = 9;
       this.groupBox2.TabStop = false;
       this.groupBox2.Text = "Graph Style";
+      // 
+      // trendLine
+      // 
+      this.trendLine.AutoSize = true;
+      this.trendLine.Location = new System.Drawing.Point(147, 66);
+      this.trendLine.Name = "trendLine";
+      this.trendLine.Size = new System.Drawing.Size(77, 17);
+      this.trendLine.TabIndex = 7;
+      this.trendLine.Text = "Trend Line";
+      this.trendLine.UseVisualStyleBackColor = true;
+      this.trendLine.CheckedChanged += new System.EventHandler(this.trendLine_CheckedChanged);
+      // 
+      // confidenceInterval
+      // 
+      this.confidenceInterval.AutoSize = true;
+      this.confidenceInterval.Location = new System.Drawing.Point(9, 66);
+      this.confidenceInterval.Name = "confidenceInterval";
+      this.confidenceInterval.Size = new System.Drawing.Size(118, 17);
+      this.confidenceInterval.TabIndex = 6;
+      this.confidenceInterval.Text = "Confidence Interval";
+      this.confidenceInterval.UseVisualStyleBackColor = true;
+      this.confidenceInterval.CheckedChanged += new System.EventHandler(this.confidenceInterval_CheckedChanged);
       // 
       // label3
       // 
@@ -172,14 +201,16 @@
       // elementSizeTrack
       // 
       this.elementSizeTrack.Enabled = false;
-      this.elementSizeTrack.LargeChange = 1;
       this.elementSizeTrack.Location = new System.Drawing.Point(147, 33);
-      this.elementSizeTrack.Maximum = 16;
-      this.elementSizeTrack.Minimum = 1;
+      this.elementSizeTrack.Maximum = 100;
+      this.elementSizeTrack.Minimum = 10;
       this.elementSizeTrack.Name = "elementSizeTrack";
       this.elementSizeTrack.Size = new System.Drawing.Size(163, 45);
+      this.elementSizeTrack.SmallChange = 5;
       this.elementSizeTrack.TabIndex = 4;
-      this.elementSizeTrack.Value = 4;
+      this.elementSizeTrack.TickFrequency = 5;
+      this.elementSizeTrack.Value = 20;
+      this.elementSizeTrack.Scroll += new System.EventHandler(this.elementSizeTrack_Scroll);
       // 
       // graphDesign
       // 
@@ -206,22 +237,51 @@
       this.label2.TabIndex = 3;
       this.label2.Text = "Graph Design";
       // 
-      // confidenceInterval
+      // groupBox3
       // 
-      this.confidenceInterval.AutoSize = true;
-      this.confidenceInterval.Location = new System.Drawing.Point(9, 66);
-      this.confidenceInterval.Name = "confidenceInterval";
-      this.confidenceInterval.Size = new System.Drawing.Size(118, 17);
-      this.confidenceInterval.TabIndex = 6;
-      this.confidenceInterval.Text = "Confidence Interval";
-      this.confidenceInterval.UseVisualStyleBackColor = true;
-      this.confidenceInterval.CheckedChanged += new System.EventHandler(this.confidenceInterval_CheckedChanged);
+      this.groupBox3.Controls.Add(this.modelSelect);
+      this.groupBox3.Controls.Add(this.label5);
+      this.groupBox3.Location = new System.Drawing.Point(540, 27);
+      this.groupBox3.Name = "groupBox3";
+      this.groupBox3.Size = new System.Drawing.Size(149, 93);
+      this.groupBox3.TabIndex = 10;
+      this.groupBox3.TabStop = false;
+      this.groupBox3.Text = "Analytics";
+      // 
+      // modelSelect
+      // 
+      this.modelSelect.AutoCompleteCustomSource.AddRange(new string[] {
+            "Scatter",
+            "Line"});
+      this.modelSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.modelSelect.FormattingEnabled = true;
+      this.modelSelect.Items.AddRange(new object[] {
+            "Local",
+            "General",
+            "Linear",
+            "Quadratic",
+            "Cubic"});
+      this.modelSelect.Location = new System.Drawing.Point(6, 33);
+      this.modelSelect.Name = "modelSelect";
+      this.modelSelect.Size = new System.Drawing.Size(135, 21);
+      this.modelSelect.TabIndex = 2;
+      this.modelSelect.SelectedIndexChanged += new System.EventHandler(this.modelSelect_SelectedIndexChanged);
+      // 
+      // label5
+      // 
+      this.label5.AutoSize = true;
+      this.label5.Location = new System.Drawing.Point(6, 17);
+      this.label5.Name = "label5";
+      this.label5.Size = new System.Drawing.Size(36, 13);
+      this.label5.TabIndex = 3;
+      this.label5.Text = "Model";
       // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(942, 650);
+      this.Controls.Add(this.groupBox3);
       this.Controls.Add(this.groupBox2);
       this.Controls.Add(this.groupBox1);
       this.Controls.Add(this.plotButton);
@@ -239,6 +299,8 @@
       this.groupBox2.ResumeLayout(false);
       this.groupBox2.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.elementSizeTrack)).EndInit();
+      this.groupBox3.ResumeLayout(false);
+      this.groupBox3.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -262,6 +324,10 @@
     private System.Windows.Forms.Label label3;
     private System.Windows.Forms.TrackBar elementSizeTrack;
     private System.Windows.Forms.CheckBox confidenceInterval;
+    private System.Windows.Forms.CheckBox trendLine;
+    private System.Windows.Forms.GroupBox groupBox3;
+    private System.Windows.Forms.ComboBox modelSelect;
+    private System.Windows.Forms.Label label5;
   }
 }
 

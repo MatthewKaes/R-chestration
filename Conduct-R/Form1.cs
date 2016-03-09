@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using RChestration.Utilities;
 using RDotNet;
 using System.IO;
+using System.Threading;
 
 namespace Conduct_R
 {
@@ -17,12 +18,14 @@ namespace Conduct_R
   {
     Dictionary<string, List<string>> rDataFrame = null;
     REngine rEngine = null;
+    private Object drawLock = new Object();
 
     public Form1()
     {
       InitializeComponent();
 
       graphDesign.SelectedIndex = 0;
+      modelSelect.SelectedIndex = 0;
 
       // Setup the R-Engine to use R
       rEngine = REngine.GetInstance();
@@ -35,6 +38,7 @@ namespace Conduct_R
 
       // Use ggplot
       rEngine.Evaluate("library(ggplot2)");
+      rEngine.Evaluate("library(Cairo");
     }
 
     private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,13 +62,13 @@ namespace Conduct_R
     {
       if (rDataFrame != null)
       {
+        DataTranslator.RImportDataFrame(rEngine, rDataFrame);
+
         dataFrameHeader1.Items.AddRange(rDataFrame.Keys.ToArray());
         dataFrameHeader1.SelectedIndex = 0;
         dataFrameHeader1.Enabled = true;
         plotButton.Enabled = true;
         elementSizeTrack.Enabled = true;
-
-        DataTranslator.RImportDataFrame(rEngine, rDataFrame);
 
         RenderData();
       }
@@ -91,27 +95,44 @@ namespace Conduct_R
 
         if (confidenceInterval.Checked)
         {
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen), method=loess, level=0.99, alpha=0.25, linetype=0)";
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen), method=loess, level=0.95, alpha=0.25, linetype=0)";
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen), method=loess, level=0.68, alpha=0.25, linetype=0)";
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen)," + GetModel() + " level=0.99, alpha=0.25, linetype=0)";
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen)," + GetModel() + " level=0.95, alpha=0.25, linetype=0)";
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen)," + GetModel() + " level=0.68, alpha=0.25, linetype=0)";
         }
 
         if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
         {
-          graphCommand += " + geom_point(shape=1, size=" + elementSizeTrack.Value + ")";
+          graphCommand += " + geom_point(shape=1, size=" + elementSizeTrack.Value / 4.0 + ")";
         }
         else if (graphDesign.Text.Equals("Line", StringComparison.InvariantCultureIgnoreCase))
         {
-          graphCommand += " + geom_line(size=" + elementSizeTrack.Value / 4.0 + ")";
+          graphCommand += " + geom_line(size=" + elementSizeTrack.Value / 10.0 + ")";
         }
         else
         {
           graphCommand += " + geom_point(shape=1)";
         }
 
+        if (trendLine.Checked)
+        {
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen)," + GetModel() + ", alpha=0, size=1.2)";
+        }
 
         rEngine.Evaluate(graphCommand);
-        rEngine.Evaluate("ggsave(filename=\"plot.png\", plot=p, width=" + (graphTarget.Width / g.DpiX) + ", height=" + (graphTarget.Height / g.DpiX) + ", units=\"in\", dpi=" + g.DpiX + ")");
+
+        for (int i = 0; i < 20; i++ )
+        {
+          try
+          {
+            rEngine.Evaluate("ggsave(filename=\"plot.png\", plot=p, type = \"cairo-png\", width=" + (graphTarget.Width / g.DpiX) + ", height=" + (graphTarget.Height / g.DpiX) + ", units=\"in\", dpi=" + g.DpiX + ")");
+            break;
+          }
+          catch
+          {
+            Thread.Sleep(50);
+          }
+        }
+        
 
       }
       finally
@@ -125,6 +146,32 @@ namespace Conduct_R
       }
     }
 
+    private string GetModel()
+    {
+      if (modelSelect.Text.Equals("Local", StringComparison.InvariantCultureIgnoreCase))
+      {
+        return " method=loess,";
+      }
+      else if (modelSelect.Text.Equals("General", StringComparison.InvariantCultureIgnoreCase))
+      {
+        return " method=glm,";
+      }
+      else if (modelSelect.Text.Equals("Linear", StringComparison.InvariantCultureIgnoreCase))
+      {
+        return " method=lm, formula = y ~ x,";
+      }
+      else if (modelSelect.Text.Equals("Quadratic", StringComparison.InvariantCultureIgnoreCase))
+      {
+        return " method=lm, formula = y ~ poly(x, 2),";
+      }
+      else if (modelSelect.Text.Equals("Cubic", StringComparison.InvariantCultureIgnoreCase))
+      {
+        return " method=lm, formula = y ~ poly(x, 3),";
+      }
+
+      return " method=lm, formula = y ~ x,";
+    }
+
     private void plotButton_Click(object sender, EventArgs e)
     {
       RenderData();
@@ -136,6 +183,26 @@ namespace Conduct_R
     }
 
     private void confidenceInterval_CheckedChanged(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
+    private void trendLine_CheckedChanged(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
+    private void modelSelect_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
+    private void dataFrameHeader1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
+    private void elementSizeTrack_Scroll(object sender, EventArgs e)
     {
       RenderData();
     }
