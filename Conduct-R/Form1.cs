@@ -62,8 +62,11 @@ namespace Conduct_R
         dataFrameHeader1.SelectedIndex = 0;
         dataFrameHeader1.Enabled = true;
         plotButton.Enabled = true;
+        elementSizeTrack.Enabled = true;
 
         DataTranslator.RImportDataFrame(rEngine, rDataFrame);
+
+        RenderData();
       }
       else
       {
@@ -74,28 +77,42 @@ namespace Conduct_R
 
     private void RenderData()
     {
+      if (rDataFrame == null)
+      {
+        return;
+      }
+
       Graphics g = this.CreateGraphics();
       try
       {
-        rEngine.Evaluate("xLen <- seq(1, length(impData))");
+        rEngine.Evaluate("xLen <- seq(1, " + rDataFrame.First().Value.Count() + ")");
 
         string graphCommand = "p <- ggplot(impData, aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen))";
 
+        if (confidenceInterval.Checked)
+        {
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen), method=loess, level=0.99, alpha=0.25, linetype=0)";
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen), method=loess, level=0.95, alpha=0.25, linetype=0)";
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen), method=loess, level=0.68, alpha=0.25, linetype=0)";
+        }
+
         if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
         {
-          graphCommand += " + geom_point(shape=1)";
+          graphCommand += " + geom_point(shape=1, size=" + elementSizeTrack.Value + ")";
         }
         else if (graphDesign.Text.Equals("Line", StringComparison.InvariantCultureIgnoreCase))
         {
-          graphCommand += " + geom_line(size=2)";
+          graphCommand += " + geom_line(size=" + elementSizeTrack.Value / 4.0 + ")";
         }
         else
         {
           graphCommand += " + geom_point(shape=1)";
         }
 
+
         rEngine.Evaluate(graphCommand);
         rEngine.Evaluate("ggsave(filename=\"plot.png\", plot=p, width=" + (graphTarget.Width / g.DpiX) + ", height=" + (graphTarget.Height / g.DpiX) + ", units=\"in\", dpi=" + g.DpiX + ")");
+
       }
       finally
       {
@@ -111,7 +128,16 @@ namespace Conduct_R
     private void plotButton_Click(object sender, EventArgs e)
     {
       RenderData();
+    }
 
+    private void graphDesign_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
+    private void confidenceInterval_CheckedChanged(object sender, EventArgs e)
+    {
+      RenderData();
     }
   }
 }
