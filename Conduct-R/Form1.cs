@@ -22,6 +22,8 @@ namespace Conduct_R
     {
       InitializeComponent();
 
+      graphDesign.SelectedIndex = 0;
+
       // Setup the R-Engine to use R
       rEngine = REngine.GetInstance();
       rEngine.Initialize();
@@ -33,16 +35,6 @@ namespace Conduct_R
 
       // Use ggplot
       rEngine.Evaluate("library(ggplot2)");
-    }
-
-    private void Form1_Load(object sender, EventArgs e)
-    {
-
-    }
-
-    private void openDataframeDialog_FileOk(object sender, CancelEventArgs e)
-    {
-
     }
 
     private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -87,7 +79,21 @@ namespace Conduct_R
       {
         rEngine.Evaluate("xLen <- seq(1, length(impData))");
 
-        string graphCommand = "p <- ggplot(impData, aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen)) + geom_point(shape=1)";
+        string graphCommand = "p <- ggplot(impData, aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen))";
+
+        if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
+        {
+          graphCommand += " + geom_point(shape=1)";
+        }
+        else if (graphDesign.Text.Equals("Line", StringComparison.InvariantCultureIgnoreCase))
+        {
+          graphCommand += " + geom_line(size=2)";
+        }
+        else
+        {
+          graphCommand += " + geom_point(shape=1)";
+        }
+
         rEngine.Evaluate(graphCommand);
         rEngine.Evaluate("ggsave(filename=\"plot.png\", plot=p, width=" + (graphTarget.Width / g.DpiX) + ", height=" + (graphTarget.Height / g.DpiX) + ", units=\"in\", dpi=" + g.DpiX + ")");
       }
@@ -95,16 +101,17 @@ namespace Conduct_R
       {
         g.Dispose();
       }
+
+      if (File.Exists("plot.png"))
+      {
+        graphTarget.ImageLocation = "plot.png";
+      }
     }
 
     private void plotButton_Click(object sender, EventArgs e)
     {
       RenderData();
 
-      if (File.Exists("plot.png"))
-      {
-        graphTarget.ImageLocation = "plot.png";
-      }
     }
   }
 }
