@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RChestration.Utilities;
 using RDotNet;
+using System.IO;
 
 namespace Conduct_R
 {
@@ -29,6 +30,9 @@ namespace Conduct_R
       rEngine.Evaluate("list.of.packages <- c(\"ggplot2\", \"Cairo\")");
       rEngine.Evaluate("new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,\"Package\"])]");
       rEngine.Evaluate("if(length(new.packages)) install.packages(new.packages)");
+
+      // Use ggplot
+      rEngine.Evaluate("library(ggplot2)");
     }
 
     private void Form1_Load(object sender, EventArgs e)
@@ -78,7 +82,29 @@ namespace Conduct_R
 
     private void RenderData()
     {
+      Graphics g = this.CreateGraphics();
+      try
+      {
+        rEngine.Evaluate("xLen <- seq(1, length(impData))");
 
+        string graphCommand = "p <- ggplot(impData, aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen)) + geom_point(shape=1)";
+        rEngine.Evaluate(graphCommand);
+        rEngine.Evaluate("ggsave(filename=\"plot.png\", plot=p, width=" + (graphTarget.Width / g.DpiX) + ", height=" + (graphTarget.Height / g.DpiX) + ", units=\"in\", dpi=" + g.DpiX + ")");
+      }
+      finally
+      {
+        g.Dispose();
+      }
+    }
+
+    private void plotButton_Click(object sender, EventArgs e)
+    {
+      RenderData();
+
+      if (File.Exists("plot.png"))
+      {
+        graphTarget.ImageLocation = "plot.png";
+      }
     }
   }
 }

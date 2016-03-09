@@ -28,7 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.pictureBox1 = new System.Windows.Forms.PictureBox();
+      this.graphTarget = new System.Windows.Forms.PictureBox();
       this.button1 = new System.Windows.Forms.Button();
       this.dataFrameHeader1 = new System.Windows.Forms.ComboBox();
       this.label1 = new System.Windows.Forms.Label();
@@ -38,28 +38,29 @@
       this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.openDataframeDialog = new System.Windows.Forms.OpenFileDialog();
-      ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.SuspendLayout();
       // 
-      // pictureBox1
+      // graphTarget
       // 
-      this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.graphTarget.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-      this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-      this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.pictureBox1.Location = new System.Drawing.Point(12, 88);
-      this.pictureBox1.Name = "pictureBox1";
-      this.pictureBox1.Size = new System.Drawing.Size(478, 356);
-      this.pictureBox1.TabIndex = 0;
-      this.pictureBox1.TabStop = false;
+      this.graphTarget.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+      this.graphTarget.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+      this.graphTarget.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+      this.graphTarget.Location = new System.Drawing.Point(12, 88);
+      this.graphTarget.Name = "graphTarget";
+      this.graphTarget.Size = new System.Drawing.Size(800, 550);
+      this.graphTarget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+      this.graphTarget.TabIndex = 0;
+      this.graphTarget.TabStop = false;
       // 
       // button1
       // 
       this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-      this.button1.Location = new System.Drawing.Point(496, 408);
+      this.button1.Location = new System.Drawing.Point(818, 602);
       this.button1.Name = "button1";
       this.button1.Size = new System.Drawing.Size(112, 36);
       this.button1.TabIndex = 1;
@@ -90,12 +91,13 @@
       // 
       this.plotButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.plotButton.Enabled = false;
-      this.plotButton.Location = new System.Drawing.Point(496, 366);
+      this.plotButton.Location = new System.Drawing.Point(818, 560);
       this.plotButton.Name = "plotButton";
       this.plotButton.Size = new System.Drawing.Size(112, 36);
       this.plotButton.TabIndex = 4;
       this.plotButton.Text = "Plot";
       this.plotButton.UseVisualStyleBackColor = true;
+      this.plotButton.Click += new System.EventHandler(this.plotButton_Click);
       // 
       // menuStrip1
       // 
@@ -104,7 +106,7 @@
             this.fileToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
-      this.menuStrip1.Size = new System.Drawing.Size(620, 24);
+      this.menuStrip1.Size = new System.Drawing.Size(942, 24);
       this.menuStrip1.TabIndex = 7;
       this.menuStrip1.Text = "menuStrip1";
       // 
@@ -139,19 +141,19 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(620, 456);
+      this.ClientSize = new System.Drawing.Size(942, 650);
       this.Controls.Add(this.plotButton);
       this.Controls.Add(this.label1);
       this.Controls.Add(this.dataFrameHeader1);
       this.Controls.Add(this.button1);
-      this.Controls.Add(this.pictureBox1);
+      this.Controls.Add(this.graphTarget);
       this.Controls.Add(this.menuStrip1);
       this.MainMenuStrip = this.menuStrip1;
-      this.MinimumSize = new System.Drawing.Size(636, 435);
+      this.MinimumSize = new System.Drawing.Size(788, 550);
       this.Name = "Form1";
       this.Text = "Form1";
       this.Load += new System.EventHandler(this.Form1_Load);
-      ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).EndInit();
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
       this.ResumeLayout(false);
@@ -161,7 +163,7 @@
 
     #endregion
 
-    private System.Windows.Forms.PictureBox pictureBox1;
+    private System.Windows.Forms.PictureBox graphTarget;
     private System.Windows.Forms.Button button1;
     private System.Windows.Forms.ComboBox dataFrameHeader1;
     private System.Windows.Forms.Label label1;

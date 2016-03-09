@@ -14,12 +14,12 @@ namespace RChestration.Utilities
     public static void RImportDataFrame(REngine targetEngine, Dictionary<string, List<string>> rDataFrame)
     {
       SortedSet<string> headerSet = new SortedSet<string>(rDataFrame.Keys);
-      SortedDictionary<string, List<string>> sortedFrame = new SortedDictionary<string, List<string>>(rDataFrame);
-
       IEnumerable[] dataBlock = new IEnumerable[rDataFrame.Keys.Count()];
-      for(int index = 0; index < rDataFrame.Keys.Count(); index++)
+
+      int index = 0;
+      foreach (string header in headerSet)
       {
-        dataBlock[index] = sortedFrame.Select(e => e.Value[index]).ToArray();
+        dataBlock[index++] = rDataFrame[header].Select<string, double>(s => Convert.ToDouble(s)).ToArray();
       }
 
       DataFrame df = targetEngine.CreateDataFrame(dataBlock, headerSet.ToArray());
