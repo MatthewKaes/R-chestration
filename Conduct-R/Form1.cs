@@ -19,7 +19,8 @@ namespace Conduct_R
     Dictionary<string, List<string>> rDataFrame = null;
     REngine rEngine = null;
     private Object drawLock = new Object();
-    bool canRender = false;
+    bool shouldRender = false;
+    bool allowRender = false;
 
     public Form1()
     {
@@ -75,12 +76,11 @@ namespace Conduct_R
         dataFrameHeader2.Enabled = true;
         elementSizeTrack.Enabled = true;
 
-        canRender = true;
-        RenderData();
+        allowRender = true;
       }
       else
       {
-        canRender = false;
+        allowRender = false;
         dataFrameHeader1.Enabled = false;
         dataFrameHeader2.Enabled = false;
       }
@@ -88,11 +88,7 @@ namespace Conduct_R
 
     private void RenderData()
     {
-      if (!canRender || rDataFrame == null)
-      {
-        return;
-      }
-
+      allowRender = false;
       Graphics g = this.CreateGraphics();
       try
       {
@@ -126,6 +122,10 @@ namespace Conduct_R
 
         // Add Aesthetics
         graphCommand += " + labs(x=\"" + xLabel.Text + "\",y=\"" + yLabel.Text + "\")";
+        if (!string.IsNullOrEmpty(titleText.Text))
+        {
+          graphCommand += " + ggtitle(\"" + titleText.Text + "\")";
+        }
 
         rEngine.Evaluate(graphCommand);
 
@@ -138,6 +138,7 @@ namespace Conduct_R
       finally
       {
         g.Dispose();
+        allowRender = true;
       }
 
       if (File.Exists("plot.png"))
@@ -184,26 +185,6 @@ namespace Conduct_R
       }
     }
 
-    private void graphDesign_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      RenderData();
-    }
-
-    private void confidenceInterval_CheckedChanged(object sender, EventArgs e)
-    {
-      RenderData();
-    }
-
-    private void trendLine_CheckedChanged(object sender, EventArgs e)
-    {
-      RenderData();
-    }
-
-    private void modelSelect_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      RenderData();
-    }
-
     private void dataFrameHeader1_SelectedIndexChanged(object sender, EventArgs e)
     {
       yLabel.Text = dataFrameHeader1.SelectedItem.ToString();
@@ -214,24 +195,66 @@ namespace Conduct_R
       xLabel.Text = dataFrameHeader2.SelectedItem.ToString();
     }
 
+    private void graphDesign_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      shouldRender = true;
+    }
+
+    private void confidenceInterval_CheckedChanged(object sender, EventArgs e)
+    {
+      shouldRender = true;
+    }
+
+    private void trendLine_CheckedChanged(object sender, EventArgs e)
+    {
+      shouldRender = true;
+    }
+
+    private void modelSelect_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      shouldRender = true;
+    }
+
     private void elementSizeTrack_Scroll(object sender, EventArgs e)
     {
-      RenderData();
+      shouldRender = true;
     }
 
     private void regressionCheck_CheckedChanged(object sender, EventArgs e)
     {
-      RenderData();
+      shouldRender = true;
     }
 
     private void xLabel_TextChanged(object sender, EventArgs e)
     {
-      RenderData();
+      shouldRender = true;
     }
 
     private void yLabel_TextChanged(object sender, EventArgs e)
     {
-      RenderData();
+      shouldRender = true;
+    }
+
+    private void titleText_TextChanged(object sender, EventArgs e)
+    {
+      shouldRender = true;
+    }
+
+    private void timer1_Tick(object sender, EventArgs e)
+    {
+      lock(drawLock)
+      {
+        if (!allowRender)
+        {
+          return;
+        }
+
+        if (shouldRender && rDataFrame != null)
+        {
+          shouldRender = false;
+          RenderData();
+        }
+      }
     }
   }
 }

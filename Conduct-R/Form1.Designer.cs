@@ -28,6 +28,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+      this.components = new System.ComponentModel.Container();
       this.graphTarget = new System.Windows.Forms.PictureBox();
       this.dataFrameHeader1 = new System.Windows.Forms.ComboBox();
       this.label1 = new System.Windows.Forms.Label();
@@ -54,6 +55,9 @@
       this.label7 = new System.Windows.Forms.Label();
       this.yLabel = new System.Windows.Forms.TextBox();
       this.label6 = new System.Windows.Forms.Label();
+      this.timer1 = new System.Windows.Forms.Timer(this.components);
+      this.titleText = new System.Windows.Forms.TextBox();
+      this.label8 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.groupBox1.SuspendLayout();
@@ -295,6 +299,8 @@
       // 
       // groupBox4
       // 
+      this.groupBox4.Controls.Add(this.titleText);
+      this.groupBox4.Controls.Add(this.label8);
       this.groupBox4.Controls.Add(this.xLabel);
       this.groupBox4.Controls.Add(this.label7);
       this.groupBox4.Controls.Add(this.yLabel);
@@ -321,7 +327,7 @@
       this.label7.Name = "label7";
       this.label7.Size = new System.Drawing.Size(43, 13);
       this.label7.TabIndex = 5;
-      this.label7.Text = "Y Label";
+      this.label7.Text = "X Label";
       // 
       // yLabel
       // 
@@ -339,6 +345,29 @@
       this.label6.Size = new System.Drawing.Size(43, 13);
       this.label6.TabIndex = 3;
       this.label6.Text = "Y Label";
+      // 
+      // timer1
+      // 
+      this.timer1.Enabled = true;
+      this.timer1.Interval = 25;
+      this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+      // 
+      // titleText
+      // 
+      this.titleText.Location = new System.Drawing.Point(159, 34);
+      this.titleText.Name = "titleText";
+      this.titleText.Size = new System.Drawing.Size(137, 20);
+      this.titleText.TabIndex = 8;
+      this.titleText.TextChanged += new System.EventHandler(this.titleText_TextChanged);
+      // 
+      // label8
+      // 
+      this.label8.AutoSize = true;
+      this.label8.Location = new System.Drawing.Point(156, 18);
+      this.label8.Name = "label8";
+      this.label8.Size = new System.Drawing.Size(27, 13);
+      this.label8.TabIndex = 7;
+      this.label8.Text = "Title";
       // 
       // Form1
       // 
@@ -400,6 +429,9 @@
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.TextBox yLabel;
     private System.Windows.Forms.Label label6;
+    private System.Windows.Forms.Timer timer1;
+    private System.Windows.Forms.TextBox titleText;
+    private System.Windows.Forms.Label label8;
   }
 }
 
