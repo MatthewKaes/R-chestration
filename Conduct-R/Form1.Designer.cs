@@ -49,12 +49,18 @@
       this.groupBox3 = new System.Windows.Forms.GroupBox();
       this.modelSelect = new System.Windows.Forms.ComboBox();
       this.label5 = new System.Windows.Forms.Label();
+      this.groupBox4 = new System.Windows.Forms.GroupBox();
+      this.xLabel = new System.Windows.Forms.TextBox();
+      this.label7 = new System.Windows.Forms.Label();
+      this.yLabel = new System.Windows.Forms.TextBox();
+      this.label6 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.groupBox1.SuspendLayout();
       this.groupBox2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.elementSizeTrack)).BeginInit();
       this.groupBox3.SuspendLayout();
+      this.groupBox4.SuspendLayout();
       this.SuspendLayout();
       // 
       // graphTarget
@@ -67,7 +73,7 @@
       this.graphTarget.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
       this.graphTarget.Location = new System.Drawing.Point(12, 139);
       this.graphTarget.Name = "graphTarget";
-      this.graphTarget.Size = new System.Drawing.Size(918, 499);
+      this.graphTarget.Size = new System.Drawing.Size(985, 554);
       this.graphTarget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
       this.graphTarget.TabIndex = 0;
       this.graphTarget.TabStop = false;
@@ -100,7 +106,7 @@
             this.fileToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
-      this.menuStrip1.Size = new System.Drawing.Size(942, 24);
+      this.menuStrip1.Size = new System.Drawing.Size(1009, 24);
       this.menuStrip1.TabIndex = 7;
       this.menuStrip1.Text = "menuStrip1";
       // 
@@ -287,11 +293,59 @@
       this.label5.TabIndex = 3;
       this.label5.Text = "Model";
       // 
+      // groupBox4
+      // 
+      this.groupBox4.Controls.Add(this.xLabel);
+      this.groupBox4.Controls.Add(this.label7);
+      this.groupBox4.Controls.Add(this.yLabel);
+      this.groupBox4.Controls.Add(this.label6);
+      this.groupBox4.Location = new System.Drawing.Point(695, 27);
+      this.groupBox4.Name = "groupBox4";
+      this.groupBox4.Size = new System.Drawing.Size(302, 106);
+      this.groupBox4.TabIndex = 11;
+      this.groupBox4.TabStop = false;
+      this.groupBox4.Text = "Aesthetics";
+      // 
+      // xLabel
+      // 
+      this.xLabel.Location = new System.Drawing.Point(9, 73);
+      this.xLabel.Name = "xLabel";
+      this.xLabel.Size = new System.Drawing.Size(144, 20);
+      this.xLabel.TabIndex = 6;
+      this.xLabel.TextChanged += new System.EventHandler(this.yLabel_TextChanged);
+      // 
+      // label7
+      // 
+      this.label7.AutoSize = true;
+      this.label7.Location = new System.Drawing.Point(6, 57);
+      this.label7.Name = "label7";
+      this.label7.Size = new System.Drawing.Size(43, 13);
+      this.label7.TabIndex = 5;
+      this.label7.Text = "Y Label";
+      // 
+      // yLabel
+      // 
+      this.yLabel.Location = new System.Drawing.Point(9, 33);
+      this.yLabel.Name = "yLabel";
+      this.yLabel.Size = new System.Drawing.Size(144, 20);
+      this.yLabel.TabIndex = 4;
+      this.yLabel.TextChanged += new System.EventHandler(this.xLabel_TextChanged);
+      // 
+      // label6
+      // 
+      this.label6.AutoSize = true;
+      this.label6.Location = new System.Drawing.Point(6, 17);
+      this.label6.Name = "label6";
+      this.label6.Size = new System.Drawing.Size(43, 13);
+      this.label6.TabIndex = 3;
+      this.label6.Text = "Y Label";
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(942, 650);
+      this.ClientSize = new System.Drawing.Size(1009, 705);
+      this.Controls.Add(this.groupBox4);
       this.Controls.Add(this.groupBox3);
       this.Controls.Add(this.groupBox2);
       this.Controls.Add(this.groupBox1);
@@ -311,6 +365,8 @@
       ((System.ComponentModel.ISupportInitialize)(this.elementSizeTrack)).EndInit();
       this.groupBox3.ResumeLayout(false);
       this.groupBox3.PerformLayout();
+      this.groupBox4.ResumeLayout(false);
+      this.groupBox4.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -339,6 +395,11 @@
     private System.Windows.Forms.Label label5;
     private System.Windows.Forms.ComboBox dataFrameHeader2;
     private System.Windows.Forms.Label label4;
+    private System.Windows.Forms.GroupBox groupBox4;
+    private System.Windows.Forms.TextBox xLabel;
+    private System.Windows.Forms.Label label7;
+    private System.Windows.Forms.TextBox yLabel;
+    private System.Windows.Forms.Label label6;
   }
 }
 

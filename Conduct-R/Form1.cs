@@ -124,20 +124,16 @@ namespace Conduct_R
           graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + ")," + GetModel() + ", alpha=0, size=1.2)";
         }
 
+        // Add Aesthetics
+        graphCommand += " + labs(x=\"" + xLabel.Text + "\",y=\"" + yLabel.Text + "\")";
+
         rEngine.Evaluate(graphCommand);
 
-        for (int i = 0; i < 20; i++ )
+        try
         {
-          try
-          {
-            rEngine.Evaluate("ggsave(filename=\"plot.png\", plot=p, type = \"cairo-png\", width=" + (graphTarget.Width / g.DpiX) + ", height=" + (graphTarget.Height / g.DpiX) + ", units=\"in\", dpi=" + g.DpiX + ")");
-            break;
-          }
-          catch
-          {
-            Thread.Sleep(50);
-          }
+          rEngine.Evaluate("ggsave(filename=\"plot.png\", plot=p, type = \"cairo-png\", width=" + (graphTarget.Width / g.DpiX) + ", height=" + (graphTarget.Height / g.DpiX) + ", units=\"in\", dpi=" + g.DpiX + ")");
         }
+        catch{ }
       }
       finally
       {
@@ -210,12 +206,12 @@ namespace Conduct_R
 
     private void dataFrameHeader1_SelectedIndexChanged(object sender, EventArgs e)
     {
-      RenderData();
+      yLabel.Text = dataFrameHeader1.SelectedItem.ToString();
     }
 
     private void dataFrameHeader2_SelectedIndexChanged(object sender, EventArgs e)
     {
-      RenderData();
+      xLabel.Text = dataFrameHeader2.SelectedItem.ToString();
     }
 
     private void elementSizeTrack_Scroll(object sender, EventArgs e)
@@ -224,6 +220,16 @@ namespace Conduct_R
     }
 
     private void regressionCheck_CheckedChanged(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
+    private void xLabel_TextChanged(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
+    private void yLabel_TextChanged(object sender, EventArgs e)
     {
       RenderData();
     }
