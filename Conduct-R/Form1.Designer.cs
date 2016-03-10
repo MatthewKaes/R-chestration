@@ -51,13 +51,14 @@
       this.modelSelect = new System.Windows.Forms.ComboBox();
       this.label5 = new System.Windows.Forms.Label();
       this.groupBox4 = new System.Windows.Forms.GroupBox();
+      this.titleText = new System.Windows.Forms.TextBox();
+      this.label8 = new System.Windows.Forms.Label();
       this.xLabel = new System.Windows.Forms.TextBox();
       this.label7 = new System.Windows.Forms.Label();
       this.yLabel = new System.Windows.Forms.TextBox();
       this.label6 = new System.Windows.Forms.Label();
       this.timer1 = new System.Windows.Forms.Timer(this.components);
-      this.titleText = new System.Windows.Forms.TextBox();
-      this.label8 = new System.Windows.Forms.Label();
+      this.saveImageDialog = new System.Windows.Forms.SaveFileDialog();
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.groupBox1.SuspendLayout();
@@ -132,13 +133,16 @@
       // 
       // saveToolStripMenuItem
       // 
+      this.saveToolStripMenuItem.Enabled = false;
       this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
       this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
       this.saveToolStripMenuItem.Text = "Save";
+      this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
       // 
       // openDataframeDialog
       // 
       this.openDataframeDialog.Filter = "Dataframe Files|*.csv";
+      this.openDataframeDialog.Title = "Open Dataframe";
       // 
       // groupBox1
       // 
@@ -312,6 +316,23 @@
       this.groupBox4.TabStop = false;
       this.groupBox4.Text = "Aesthetics";
       // 
+      // titleText
+      // 
+      this.titleText.Location = new System.Drawing.Point(159, 34);
+      this.titleText.Name = "titleText";
+      this.titleText.Size = new System.Drawing.Size(137, 20);
+      this.titleText.TabIndex = 8;
+      this.titleText.TextChanged += new System.EventHandler(this.titleText_TextChanged);
+      // 
+      // label8
+      // 
+      this.label8.AutoSize = true;
+      this.label8.Location = new System.Drawing.Point(156, 18);
+      this.label8.Name = "label8";
+      this.label8.Size = new System.Drawing.Size(27, 13);
+      this.label8.TabIndex = 7;
+      this.label8.Text = "Title";
+      // 
       // xLabel
       // 
       this.xLabel.Location = new System.Drawing.Point(9, 73);
@@ -352,22 +373,11 @@
       this.timer1.Interval = 25;
       this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
       // 
-      // titleText
+      // saveImageDialog
       // 
-      this.titleText.Location = new System.Drawing.Point(159, 34);
-      this.titleText.Name = "titleText";
-      this.titleText.Size = new System.Drawing.Size(137, 20);
-      this.titleText.TabIndex = 8;
-      this.titleText.TextChanged += new System.EventHandler(this.titleText_TextChanged);
-      // 
-      // label8
-      // 
-      this.label8.AutoSize = true;
-      this.label8.Location = new System.Drawing.Point(156, 18);
-      this.label8.Name = "label8";
-      this.label8.Size = new System.Drawing.Size(27, 13);
-      this.label8.TabIndex = 7;
-      this.label8.Text = "Title";
+      this.saveImageDialog.DefaultExt = "png";
+      this.saveImageDialog.Filter = "Image Render|*.png";
+      this.saveImageDialog.Title = "Save Rendering";
       // 
       // Form1
       // 
@@ -381,9 +391,10 @@
       this.Controls.Add(this.graphTarget);
       this.Controls.Add(this.menuStrip1);
       this.MainMenuStrip = this.menuStrip1;
-      this.MinimumSize = new System.Drawing.Size(958, 688);
+      this.MinimumSize = new System.Drawing.Size(1025, 743);
       this.Name = "Form1";
       this.Text = "Conduct-R";
+      this.ResizeEnd += new System.EventHandler(this.ResizeRedraw);
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).EndInit();
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
@@ -432,6 +443,7 @@
     private System.Windows.Forms.Timer timer1;
     private System.Windows.Forms.TextBox titleText;
     private System.Windows.Forms.Label label8;
+    private System.Windows.Forms.SaveFileDialog saveImageDialog;
   }
 }
 

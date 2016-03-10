@@ -60,6 +60,19 @@ namespace Conduct_R
       }
     }
 
+    private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      DialogResult result = saveImageDialog.ShowDialog();
+      if (result == DialogResult.OK)
+      {
+        if (File.Exists("plot.png"))
+        {
+          string file = saveImageDialog.FileName;
+          File.Copy("plot.png", file);
+        }
+      }
+    }
+
     private void processDataFrame()
     {
       if (rDataFrame != null)
@@ -75,6 +88,7 @@ namespace Conduct_R
         dataFrameHeader2.SelectedIndex = 0;
         dataFrameHeader2.Enabled = true;
         elementSizeTrack.Enabled = true;
+        saveToolStripMenuItem.Enabled = true;
 
         allowRender = true;
       }
@@ -83,6 +97,7 @@ namespace Conduct_R
         allowRender = false;
         dataFrameHeader1.Enabled = false;
         dataFrameHeader2.Enabled = false;
+        saveToolStripMenuItem.Enabled = false;
       }
     }
 
@@ -236,6 +251,11 @@ namespace Conduct_R
     }
 
     private void titleText_TextChanged(object sender, EventArgs e)
+    {
+      shouldRender = true;
+    }
+
+    private void ResizeRedraw(object sender, EventArgs e)
     {
       shouldRender = true;
     }
