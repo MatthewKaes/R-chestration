@@ -19,6 +19,7 @@ namespace Conduct_R
     Dictionary<string, List<string>> rDataFrame = null;
     REngine rEngine = null;
     private Object drawLock = new Object();
+    bool canRender = false;
 
     public Form1()
     {
@@ -67,21 +68,27 @@ namespace Conduct_R
         dataFrameHeader1.Items.AddRange(rDataFrame.Keys.ToArray());
         dataFrameHeader1.SelectedIndex = 0;
         dataFrameHeader1.Enabled = true;
-        plotButton.Enabled = true;
+        SortedSet<string> sortedKeys = new SortedSet<string>(rDataFrame.Keys);
+        dataFrameHeader2.Items.Add("Time Sequence");
+        dataFrameHeader2.Items.AddRange(sortedKeys.ToArray());
+        dataFrameHeader2.SelectedIndex = 0;
+        dataFrameHeader2.Enabled = true;
         elementSizeTrack.Enabled = true;
 
+        canRender = true;
         RenderData();
       }
       else
       {
+        canRender = false;
         dataFrameHeader1.Enabled = false;
-        plotButton.Enabled = false;
+        dataFrameHeader2.Enabled = false;
       }
     }
 
     private void RenderData()
     {
-      if (rDataFrame == null)
+      if (!canRender || rDataFrame == null)
       {
         return;
       }
@@ -91,13 +98,12 @@ namespace Conduct_R
       {
         rEngine.Evaluate("xLen <- seq(1, " + rDataFrame.First().Value.Count() + ")");
 
-        string graphCommand = "p <- ggplot(impData, aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen))";
-
+        string graphCommand = "p <- ggplot(impData, aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + "))";
         if (confidenceInterval.Checked)
         {
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen)," + GetModel() + " level=0.99, alpha=0.25, linetype=0)";
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen)," + GetModel() + " level=0.95, alpha=0.25, linetype=0)";
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen)," + GetModel() + " level=0.68, alpha=0.25, linetype=0)";
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + ")," + GetModel() + " level=0.99, alpha=0.25, linetype=0)";
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + ")," + GetModel() + " level=0.95, alpha=0.25, linetype=0)";
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + ")," + GetModel() + " level=0.68, alpha=0.25, linetype=0)";
         }
 
         if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
@@ -115,7 +121,7 @@ namespace Conduct_R
 
         if (trendLine.Checked)
         {
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=xLen)," + GetModel() + ", alpha=0, size=1.2)";
+          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + ")," + GetModel() + ", alpha=0, size=1.2)";
         }
 
         rEngine.Evaluate(graphCommand);
@@ -132,8 +138,6 @@ namespace Conduct_R
             Thread.Sleep(50);
           }
         }
-        
-
       }
       finally
       {
@@ -172,9 +176,16 @@ namespace Conduct_R
       return " method=lm, formula = y ~ x,";
     }
 
-    private void plotButton_Click(object sender, EventArgs e)
+    private string GetSequence()
     {
-      RenderData();
+      if (dataFrameHeader2.SelectedItem.Equals("Time Sequence"))
+      {
+        return "xLen";
+      }
+      else
+      {
+        return dataFrameHeader2.SelectedItem.ToString();
+      }
     }
 
     private void graphDesign_SelectedIndexChanged(object sender, EventArgs e)
@@ -202,7 +213,17 @@ namespace Conduct_R
       RenderData();
     }
 
+    private void dataFrameHeader2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
     private void elementSizeTrack_Scroll(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
+    private void regressionCheck_CheckedChanged(object sender, EventArgs e)
     {
       RenderData();
     }
