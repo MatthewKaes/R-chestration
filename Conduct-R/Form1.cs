@@ -79,9 +79,9 @@ namespace Conduct_R
       {
         DataTranslator.RImportDataFrame(rEngine, rDataFrame);
 
-        dataFrameHeader1.Items.AddRange(rDataFrame.Keys.ToArray());
-        dataFrameHeader1.SelectedIndex = 0;
-        dataFrameHeader1.Enabled = true;
+        dataFeatures.Items.Clear();
+        dataFeatures.Items.AddRange(rDataFrame.Keys.ToArray());
+        dataFeatures.Enabled = true;
         SortedSet<string> sortedKeys = new SortedSet<string>(rDataFrame.Keys);
         dataFrameHeader2.Items.Add("Time Sequence");
         dataFrameHeader2.Items.AddRange(sortedKeys.ToArray());
@@ -95,7 +95,7 @@ namespace Conduct_R
       else
       {
         allowRender = false;
-        dataFrameHeader1.Enabled = false;
+        dataFeatures.Enabled = false;
         dataFrameHeader2.Enabled = false;
         saveToolStripMenuItem.Enabled = false;
       }
@@ -103,36 +103,43 @@ namespace Conduct_R
 
     private void RenderData()
     {
+      if (dataFeatures.CheckedItems.Count == 0)
+      {
+        dataFeatures.SetItemChecked(0, true);
+      }
+
       allowRender = false;
-      Graphics g = this.CreateGraphics();
       try
       {
         rEngine.Evaluate("xLen <- seq(1, " + rDataFrame.First().Value.Count() + ")");
 
-        string graphCommand = "p <- ggplot(impData, aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + "))";
-        if (confidenceInterval.Checked)
+        string graphCommand = "p <- ggplot(impData)";
+        foreach (var item in dataFeatures.CheckedItems)
         {
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + ")," + GetModel() + " level=0.99, alpha=0.25, linetype=0)";
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + ")," + GetModel() + " level=0.95, alpha=0.25, linetype=0)";
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + ")," + GetModel() + " level=0.68, alpha=0.25, linetype=0)";
-        }
+          if (confidenceInterval.Checked)
+          {
+            graphCommand += " + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.99, alpha=0.25, linetype=0)";
+            graphCommand += " + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.95, alpha=0.25, linetype=0)";
+            graphCommand += " + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.68, alpha=0.25, linetype=0)";
+          }
 
-        if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
-        {
-          graphCommand += " + geom_point(shape=1, size=" + elementSizeTrack.Value / 4.0 + ")";
-        }
-        else if (graphDesign.Text.Equals("Line", StringComparison.InvariantCultureIgnoreCase))
-        {
-          graphCommand += " + geom_line(size=" + elementSizeTrack.Value / 10.0 + ")";
-        }
-        else
-        {
-          graphCommand += " + geom_point(shape=1)";
-        }
+          if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
+          {
+            graphCommand += " + geom_point(size=" + elementSizeTrack.Value / 4.0 + ", aes(y=" + item + ", x=" + GetSequence() + "))";
+          }
+          else if (graphDesign.Text.Equals("Line", StringComparison.InvariantCultureIgnoreCase))
+          {
+            graphCommand += " + geom_line(size=" + elementSizeTrack.Value / 10.0 + ", aes(y=" + item + ", x=" + GetSequence() + "))";
+          }
+          else
+          {
+            graphCommand += " + geom_point(shape=1, aes(y=" + item + ", x=" + GetSequence() + "))";
+          }
 
-        if (trendLine.Checked)
-        {
-          graphCommand += " + geom_smooth(aes(y=" + dataFrameHeader1.SelectedItem + ", x=" + GetSequence() + ")," + GetModel() + ", alpha=0, size=1.2)";
+          if (trendLine.Checked)
+          {
+            graphCommand += " + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + ", alpha=0, size=1.2)";
+          }
         }
 
         // Add Aesthetics
@@ -146,13 +153,12 @@ namespace Conduct_R
 
         try
         {
-          rEngine.Evaluate("ggsave(filename=\"plot.png\", plot=p, type = \"cairo-png\", width=" + (graphTarget.Width / g.DpiX) + ", height=" + (graphTarget.Height / g.DpiX) + ", units=\"in\", dpi=" + g.DpiX + ")");
+          rEngine.Evaluate("ggsave(filename=\"plot.png\", plot=p, type = \"cairo-png\", width=" + (graphTarget.Width / (float)dpiTicker.Value) + ", height=" + (graphTarget.Height / (float)dpiTicker.Value) + ", units=\"in\", dpi=" + dpiTicker.Value + ")");
         }
         catch{ }
       }
       finally
       {
-        g.Dispose();
         allowRender = true;
       }
 
@@ -198,11 +204,6 @@ namespace Conduct_R
       {
         return dataFrameHeader2.SelectedItem.ToString();
       }
-    }
-
-    private void dataFrameHeader1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-      yLabel.Text = dataFrameHeader1.SelectedItem.ToString();
     }
 
     private void dataFrameHeader2_SelectedIndexChanged(object sender, EventArgs e)
@@ -255,26 +256,37 @@ namespace Conduct_R
       shouldRender = true;
     }
 
-    private void ResizeRedraw(object sender, EventArgs e)
+    private void ResizeRedrawRender(object sender, EventArgs e)
+    {
+      shouldRender = true;
+    }
+
+    private void trackBar1_Scroll(object sender, EventArgs e)
     {
       shouldRender = true;
     }
 
     private void timer1_Tick(object sender, EventArgs e)
     {
-      lock(drawLock)
+      if (!allowRender)
       {
-        if (!allowRender)
-        {
-          return;
-        }
+        return;
+      }
 
-        if (shouldRender && rDataFrame != null)
+      if (shouldRender && rDataFrame != null)
+      {
+        lock(drawLock)
         {
           shouldRender = false;
           RenderData();
         }
       }
     }
+
+    private void dataFeatures_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
   }
 }

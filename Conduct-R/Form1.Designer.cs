@@ -30,27 +30,18 @@
     {
       this.components = new System.ComponentModel.Container();
       this.graphTarget = new System.Windows.Forms.PictureBox();
-      this.dataFrameHeader1 = new System.Windows.Forms.ComboBox();
       this.label1 = new System.Windows.Forms.Label();
       this.menuStrip1 = new System.Windows.Forms.MenuStrip();
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.openDataframeDialog = new System.Windows.Forms.OpenFileDialog();
-      this.groupBox1 = new System.Windows.Forms.GroupBox();
       this.dataFrameHeader2 = new System.Windows.Forms.ComboBox();
       this.label4 = new System.Windows.Forms.Label();
-      this.groupBox2 = new System.Windows.Forms.GroupBox();
       this.trendLine = new System.Windows.Forms.CheckBox();
       this.confidenceInterval = new System.Windows.Forms.CheckBox();
-      this.label3 = new System.Windows.Forms.Label();
-      this.elementSizeTrack = new System.Windows.Forms.TrackBar();
-      this.graphDesign = new System.Windows.Forms.ComboBox();
-      this.label2 = new System.Windows.Forms.Label();
-      this.groupBox3 = new System.Windows.Forms.GroupBox();
       this.modelSelect = new System.Windows.Forms.ComboBox();
       this.label5 = new System.Windows.Forms.Label();
-      this.groupBox4 = new System.Windows.Forms.GroupBox();
       this.titleText = new System.Windows.Forms.TextBox();
       this.label8 = new System.Windows.Forms.Label();
       this.xLabel = new System.Windows.Forms.TextBox();
@@ -59,13 +50,26 @@
       this.label6 = new System.Windows.Forms.Label();
       this.timer1 = new System.Windows.Forms.Timer(this.components);
       this.saveImageDialog = new System.Windows.Forms.SaveFileDialog();
+      this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+      this.tabControl1 = new System.Windows.Forms.TabControl();
+      this.tabPage2 = new System.Windows.Forms.TabPage();
+      this.label2 = new System.Windows.Forms.Label();
+      this.graphDesign = new System.Windows.Forms.ComboBox();
+      this.label3 = new System.Windows.Forms.Label();
+      this.elementSizeTrack = new System.Windows.Forms.TrackBar();
+      this.tabPage3 = new System.Windows.Forms.TabPage();
+      this.tabPage4 = new System.Windows.Forms.TabPage();
+      this.dataFeatures = new System.Windows.Forms.CheckedListBox();
+      this.label9 = new System.Windows.Forms.Label();
+      this.dpiTicker = new System.Windows.Forms.TrackBar();
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
-      this.groupBox1.SuspendLayout();
-      this.groupBox2.SuspendLayout();
+      this.tabControl1.SuspendLayout();
+      this.tabPage2.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.elementSizeTrack)).BeginInit();
-      this.groupBox3.SuspendLayout();
-      this.groupBox4.SuspendLayout();
+      this.tabPage3.SuspendLayout();
+      this.tabPage4.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dpiTicker)).BeginInit();
       this.SuspendLayout();
       // 
       // graphTarget
@@ -75,34 +79,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.graphTarget.BackColor = System.Drawing.SystemColors.ButtonHighlight;
       this.graphTarget.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-      this.graphTarget.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-      this.graphTarget.Location = new System.Drawing.Point(12, 139);
+      this.graphTarget.Location = new System.Drawing.Point(12, 166);
       this.graphTarget.Name = "graphTarget";
-      this.graphTarget.Size = new System.Drawing.Size(985, 554);
+      this.graphTarget.Size = new System.Drawing.Size(985, 381);
       this.graphTarget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
       this.graphTarget.TabIndex = 0;
       this.graphTarget.TabStop = false;
       // 
-      // dataFrameHeader1
-      // 
-      this.dataFrameHeader1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.dataFrameHeader1.Enabled = false;
-      this.dataFrameHeader1.FormattingEnabled = true;
-      this.dataFrameHeader1.Location = new System.Drawing.Point(6, 33);
-      this.dataFrameHeader1.Name = "dataFrameHeader1";
-      this.dataFrameHeader1.Size = new System.Drawing.Size(188, 21);
-      this.dataFrameHeader1.Sorted = true;
-      this.dataFrameHeader1.TabIndex = 2;
-      this.dataFrameHeader1.SelectedIndexChanged += new System.EventHandler(this.dataFrameHeader1_SelectedIndexChanged);
-      // 
       // label1
       // 
       this.label1.AutoSize = true;
-      this.label1.Location = new System.Drawing.Point(6, 17);
+      this.label1.Location = new System.Drawing.Point(12, 33);
       this.label1.Name = "label1";
-      this.label1.Size = new System.Drawing.Size(39, 13);
+      this.label1.Size = new System.Drawing.Size(48, 13);
       this.label1.TabIndex = 3;
-      this.label1.Text = "Data 1";
+      this.label1.Text = "Features";
       // 
       // menuStrip1
       // 
@@ -144,25 +135,12 @@
       this.openDataframeDialog.Filter = "Dataframe Files|*.csv";
       this.openDataframeDialog.Title = "Open Dataframe";
       // 
-      // groupBox1
-      // 
-      this.groupBox1.Controls.Add(this.dataFrameHeader2);
-      this.groupBox1.Controls.Add(this.label4);
-      this.groupBox1.Controls.Add(this.dataFrameHeader1);
-      this.groupBox1.Controls.Add(this.label1);
-      this.groupBox1.Location = new System.Drawing.Point(12, 27);
-      this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(200, 106);
-      this.groupBox1.TabIndex = 8;
-      this.groupBox1.TabStop = false;
-      this.groupBox1.Text = "Data Selection";
-      // 
       // dataFrameHeader2
       // 
       this.dataFrameHeader2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.dataFrameHeader2.Enabled = false;
       this.dataFrameHeader2.FormattingEnabled = true;
-      this.dataFrameHeader2.Location = new System.Drawing.Point(6, 73);
+      this.dataFrameHeader2.Location = new System.Drawing.Point(206, 49);
       this.dataFrameHeader2.Name = "dataFrameHeader2";
       this.dataFrameHeader2.Size = new System.Drawing.Size(188, 21);
       this.dataFrameHeader2.TabIndex = 5;
@@ -171,31 +149,16 @@
       // label4
       // 
       this.label4.AutoSize = true;
-      this.label4.Location = new System.Drawing.Point(6, 57);
+      this.label4.Location = new System.Drawing.Point(206, 33);
       this.label4.Name = "label4";
-      this.label4.Size = new System.Drawing.Size(39, 13);
+      this.label4.Size = new System.Drawing.Size(106, 13);
       this.label4.TabIndex = 4;
-      this.label4.Text = "Data 2";
-      // 
-      // groupBox2
-      // 
-      this.groupBox2.Controls.Add(this.trendLine);
-      this.groupBox2.Controls.Add(this.confidenceInterval);
-      this.groupBox2.Controls.Add(this.label3);
-      this.groupBox2.Controls.Add(this.elementSizeTrack);
-      this.groupBox2.Controls.Add(this.graphDesign);
-      this.groupBox2.Controls.Add(this.label2);
-      this.groupBox2.Location = new System.Drawing.Point(218, 27);
-      this.groupBox2.Name = "groupBox2";
-      this.groupBox2.Size = new System.Drawing.Size(316, 106);
-      this.groupBox2.TabIndex = 9;
-      this.groupBox2.TabStop = false;
-      this.groupBox2.Text = "Graph Style";
+      this.label4.Text = "Independent Feature";
       // 
       // trendLine
       // 
       this.trendLine.AutoSize = true;
-      this.trendLine.Location = new System.Drawing.Point(148, 73);
+      this.trendLine.Location = new System.Drawing.Point(297, 26);
       this.trendLine.Name = "trendLine";
       this.trendLine.Size = new System.Drawing.Size(77, 17);
       this.trendLine.TabIndex = 7;
@@ -206,72 +169,13 @@
       // confidenceInterval
       // 
       this.confidenceInterval.AutoSize = true;
-      this.confidenceInterval.Location = new System.Drawing.Point(10, 73);
+      this.confidenceInterval.Location = new System.Drawing.Point(161, 28);
       this.confidenceInterval.Name = "confidenceInterval";
       this.confidenceInterval.Size = new System.Drawing.Size(118, 17);
       this.confidenceInterval.TabIndex = 6;
       this.confidenceInterval.Text = "Confidence Interval";
       this.confidenceInterval.UseVisualStyleBackColor = true;
       this.confidenceInterval.CheckedChanged += new System.EventHandler(this.confidenceInterval_CheckedChanged);
-      // 
-      // label3
-      // 
-      this.label3.AutoSize = true;
-      this.label3.Location = new System.Drawing.Point(156, 17);
-      this.label3.Name = "label3";
-      this.label3.Size = new System.Drawing.Size(68, 13);
-      this.label3.TabIndex = 5;
-      this.label3.Text = "Element Size";
-      // 
-      // elementSizeTrack
-      // 
-      this.elementSizeTrack.Enabled = false;
-      this.elementSizeTrack.Location = new System.Drawing.Point(147, 33);
-      this.elementSizeTrack.Maximum = 70;
-      this.elementSizeTrack.Minimum = 10;
-      this.elementSizeTrack.Name = "elementSizeTrack";
-      this.elementSizeTrack.Size = new System.Drawing.Size(163, 45);
-      this.elementSizeTrack.SmallChange = 5;
-      this.elementSizeTrack.TabIndex = 4;
-      this.elementSizeTrack.TickFrequency = 5;
-      this.elementSizeTrack.Value = 20;
-      this.elementSizeTrack.Scroll += new System.EventHandler(this.elementSizeTrack_Scroll);
-      // 
-      // graphDesign
-      // 
-      this.graphDesign.AutoCompleteCustomSource.AddRange(new string[] {
-            "Scatter",
-            "Line"});
-      this.graphDesign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.graphDesign.FormattingEnabled = true;
-      this.graphDesign.Items.AddRange(new object[] {
-            "Scatter",
-            "Line"});
-      this.graphDesign.Location = new System.Drawing.Point(6, 33);
-      this.graphDesign.Name = "graphDesign";
-      this.graphDesign.Size = new System.Drawing.Size(135, 21);
-      this.graphDesign.TabIndex = 2;
-      this.graphDesign.SelectedIndexChanged += new System.EventHandler(this.graphDesign_SelectedIndexChanged);
-      // 
-      // label2
-      // 
-      this.label2.AutoSize = true;
-      this.label2.Location = new System.Drawing.Point(6, 17);
-      this.label2.Name = "label2";
-      this.label2.Size = new System.Drawing.Size(72, 13);
-      this.label2.TabIndex = 3;
-      this.label2.Text = "Graph Design";
-      // 
-      // groupBox3
-      // 
-      this.groupBox3.Controls.Add(this.modelSelect);
-      this.groupBox3.Controls.Add(this.label5);
-      this.groupBox3.Location = new System.Drawing.Point(540, 27);
-      this.groupBox3.Name = "groupBox3";
-      this.groupBox3.Size = new System.Drawing.Size(149, 106);
-      this.groupBox3.TabIndex = 10;
-      this.groupBox3.TabStop = false;
-      this.groupBox3.Text = "Analytics";
       // 
       // modelSelect
       // 
@@ -286,7 +190,7 @@
             "Linear",
             "Quadratic",
             "Cubic"});
-      this.modelSelect.Location = new System.Drawing.Point(6, 33);
+      this.modelSelect.Location = new System.Drawing.Point(6, 26);
       this.modelSelect.Name = "modelSelect";
       this.modelSelect.Size = new System.Drawing.Size(135, 21);
       this.modelSelect.TabIndex = 2;
@@ -295,30 +199,15 @@
       // label5
       // 
       this.label5.AutoSize = true;
-      this.label5.Location = new System.Drawing.Point(6, 17);
+      this.label5.Location = new System.Drawing.Point(6, 10);
       this.label5.Name = "label5";
       this.label5.Size = new System.Drawing.Size(36, 13);
       this.label5.TabIndex = 3;
       this.label5.Text = "Model";
       // 
-      // groupBox4
-      // 
-      this.groupBox4.Controls.Add(this.titleText);
-      this.groupBox4.Controls.Add(this.label8);
-      this.groupBox4.Controls.Add(this.xLabel);
-      this.groupBox4.Controls.Add(this.label7);
-      this.groupBox4.Controls.Add(this.yLabel);
-      this.groupBox4.Controls.Add(this.label6);
-      this.groupBox4.Location = new System.Drawing.Point(695, 27);
-      this.groupBox4.Name = "groupBox4";
-      this.groupBox4.Size = new System.Drawing.Size(302, 106);
-      this.groupBox4.TabIndex = 11;
-      this.groupBox4.TabStop = false;
-      this.groupBox4.Text = "Aesthetics";
-      // 
       // titleText
       // 
-      this.titleText.Location = new System.Drawing.Point(159, 34);
+      this.titleText.Location = new System.Drawing.Point(156, 27);
       this.titleText.Name = "titleText";
       this.titleText.Size = new System.Drawing.Size(137, 20);
       this.titleText.TabIndex = 8;
@@ -327,7 +216,7 @@
       // label8
       // 
       this.label8.AutoSize = true;
-      this.label8.Location = new System.Drawing.Point(156, 18);
+      this.label8.Location = new System.Drawing.Point(153, 11);
       this.label8.Name = "label8";
       this.label8.Size = new System.Drawing.Size(27, 13);
       this.label8.TabIndex = 7;
@@ -335,7 +224,7 @@
       // 
       // xLabel
       // 
-      this.xLabel.Location = new System.Drawing.Point(9, 73);
+      this.xLabel.Location = new System.Drawing.Point(6, 66);
       this.xLabel.Name = "xLabel";
       this.xLabel.Size = new System.Drawing.Size(144, 20);
       this.xLabel.TabIndex = 6;
@@ -344,7 +233,7 @@
       // label7
       // 
       this.label7.AutoSize = true;
-      this.label7.Location = new System.Drawing.Point(6, 57);
+      this.label7.Location = new System.Drawing.Point(3, 50);
       this.label7.Name = "label7";
       this.label7.Size = new System.Drawing.Size(43, 13);
       this.label7.TabIndex = 5;
@@ -352,7 +241,7 @@
       // 
       // yLabel
       // 
-      this.yLabel.Location = new System.Drawing.Point(9, 33);
+      this.yLabel.Location = new System.Drawing.Point(6, 26);
       this.yLabel.Name = "yLabel";
       this.yLabel.Size = new System.Drawing.Size(144, 20);
       this.yLabel.TabIndex = 4;
@@ -361,7 +250,7 @@
       // label6
       // 
       this.label6.AutoSize = true;
-      this.label6.Location = new System.Drawing.Point(6, 17);
+      this.label6.Location = new System.Drawing.Point(3, 10);
       this.label6.Name = "label6";
       this.label6.Size = new System.Drawing.Size(43, 13);
       this.label6.TabIndex = 3;
@@ -379,34 +268,172 @@
       this.saveImageDialog.Filter = "Image Render|*.png";
       this.saveImageDialog.Title = "Save Rendering";
       // 
+      // tabControl1
+      // 
+      this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.tabControl1.Controls.Add(this.tabPage2);
+      this.tabControl1.Controls.Add(this.tabPage3);
+      this.tabControl1.Controls.Add(this.tabPage4);
+      this.tabControl1.Location = new System.Drawing.Point(400, 27);
+      this.tabControl1.Name = "tabControl1";
+      this.tabControl1.SelectedIndex = 0;
+      this.tabControl1.Size = new System.Drawing.Size(597, 133);
+      this.tabControl1.TabIndex = 12;
+      // 
+      // tabPage2
+      // 
+      this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+      this.tabPage2.Controls.Add(this.label2);
+      this.tabPage2.Controls.Add(this.graphDesign);
+      this.tabPage2.Controls.Add(this.label3);
+      this.tabPage2.Controls.Add(this.elementSizeTrack);
+      this.tabPage2.Location = new System.Drawing.Point(4, 22);
+      this.tabPage2.Name = "tabPage2";
+      this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage2.Size = new System.Drawing.Size(589, 107);
+      this.tabPage2.TabIndex = 1;
+      this.tabPage2.Text = "Style";
+      // 
+      // label2
+      // 
+      this.label2.AutoSize = true;
+      this.label2.Location = new System.Drawing.Point(6, 10);
+      this.label2.Name = "label2";
+      this.label2.Size = new System.Drawing.Size(72, 13);
+      this.label2.TabIndex = 3;
+      this.label2.Text = "Graph Design";
+      // 
+      // graphDesign
+      // 
+      this.graphDesign.AutoCompleteCustomSource.AddRange(new string[] {
+            "Scatter",
+            "Line"});
+      this.graphDesign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.graphDesign.FormattingEnabled = true;
+      this.graphDesign.Items.AddRange(new object[] {
+            "Scatter",
+            "Line"});
+      this.graphDesign.Location = new System.Drawing.Point(6, 26);
+      this.graphDesign.Name = "graphDesign";
+      this.graphDesign.Size = new System.Drawing.Size(135, 21);
+      this.graphDesign.TabIndex = 2;
+      this.graphDesign.SelectedIndexChanged += new System.EventHandler(this.graphDesign_SelectedIndexChanged);
+      // 
+      // label3
+      // 
+      this.label3.AutoSize = true;
+      this.label3.Location = new System.Drawing.Point(156, 10);
+      this.label3.Name = "label3";
+      this.label3.Size = new System.Drawing.Size(68, 13);
+      this.label3.TabIndex = 5;
+      this.label3.Text = "Element Size";
+      // 
+      // elementSizeTrack
+      // 
+      this.elementSizeTrack.Enabled = false;
+      this.elementSizeTrack.Location = new System.Drawing.Point(147, 26);
+      this.elementSizeTrack.Maximum = 70;
+      this.elementSizeTrack.Minimum = 10;
+      this.elementSizeTrack.Name = "elementSizeTrack";
+      this.elementSizeTrack.Size = new System.Drawing.Size(163, 45);
+      this.elementSizeTrack.SmallChange = 5;
+      this.elementSizeTrack.TabIndex = 4;
+      this.elementSizeTrack.TickFrequency = 5;
+      this.elementSizeTrack.Value = 20;
+      this.elementSizeTrack.Scroll += new System.EventHandler(this.elementSizeTrack_Scroll);
+      // 
+      // tabPage3
+      // 
+      this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
+      this.tabPage3.Controls.Add(this.trendLine);
+      this.tabPage3.Controls.Add(this.modelSelect);
+      this.tabPage3.Controls.Add(this.label5);
+      this.tabPage3.Controls.Add(this.confidenceInterval);
+      this.tabPage3.Location = new System.Drawing.Point(4, 22);
+      this.tabPage3.Name = "tabPage3";
+      this.tabPage3.Size = new System.Drawing.Size(589, 107);
+      this.tabPage3.TabIndex = 2;
+      this.tabPage3.Text = "Analytics";
+      // 
+      // tabPage4
+      // 
+      this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
+      this.tabPage4.Controls.Add(this.label9);
+      this.tabPage4.Controls.Add(this.dpiTicker);
+      this.tabPage4.Controls.Add(this.titleText);
+      this.tabPage4.Controls.Add(this.label6);
+      this.tabPage4.Controls.Add(this.label8);
+      this.tabPage4.Controls.Add(this.yLabel);
+      this.tabPage4.Controls.Add(this.xLabel);
+      this.tabPage4.Controls.Add(this.label7);
+      this.tabPage4.Location = new System.Drawing.Point(4, 22);
+      this.tabPage4.Name = "tabPage4";
+      this.tabPage4.Size = new System.Drawing.Size(589, 107);
+      this.tabPage4.TabIndex = 3;
+      this.tabPage4.Text = "Aesthetics";
+      // 
+      // dataFeatures
+      // 
+      this.dataFeatures.Enabled = false;
+      this.dataFeatures.FormattingEnabled = true;
+      this.dataFeatures.Location = new System.Drawing.Point(15, 49);
+      this.dataFeatures.Name = "dataFeatures";
+      this.dataFeatures.Size = new System.Drawing.Size(185, 109);
+      this.dataFeatures.TabIndex = 13;
+      this.dataFeatures.SelectedIndexChanged += new System.EventHandler(this.dataFeatures_SelectedIndexChanged);
+      // 
+      // label9
+      // 
+      this.label9.AutoSize = true;
+      this.label9.Location = new System.Drawing.Point(308, 11);
+      this.label9.Name = "label9";
+      this.label9.Size = new System.Drawing.Size(57, 13);
+      this.label9.TabIndex = 10;
+      this.label9.Text = "Graph DPI";
+      // 
+      // dpiTicker
+      // 
+      this.dpiTicker.LargeChange = 10;
+      this.dpiTicker.Location = new System.Drawing.Point(299, 27);
+      this.dpiTicker.Maximum = 200;
+      this.dpiTicker.Minimum = 70;
+      this.dpiTicker.Name = "dpiTicker";
+      this.dpiTicker.Size = new System.Drawing.Size(163, 45);
+      this.dpiTicker.SmallChange = 10;
+      this.dpiTicker.TabIndex = 9;
+      this.dpiTicker.TickFrequency = 10;
+      this.dpiTicker.Value = 150;
+      this.dpiTicker.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(1009, 705);
-      this.Controls.Add(this.groupBox4);
-      this.Controls.Add(this.groupBox3);
-      this.Controls.Add(this.groupBox2);
-      this.Controls.Add(this.groupBox1);
+      this.ClientSize = new System.Drawing.Size(1009, 559);
+      this.Controls.Add(this.dataFeatures);
+      this.Controls.Add(this.dataFrameHeader2);
+      this.Controls.Add(this.tabControl1);
       this.Controls.Add(this.graphTarget);
+      this.Controls.Add(this.label4);
       this.Controls.Add(this.menuStrip1);
+      this.Controls.Add(this.label1);
       this.MainMenuStrip = this.menuStrip1;
-      this.MinimumSize = new System.Drawing.Size(1025, 743);
       this.Name = "Form1";
       this.Text = "Conduct-R";
-      this.ResizeEnd += new System.EventHandler(this.ResizeRedraw);
+      this.ResizeEnd += new System.EventHandler(this.ResizeRedrawRender);
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).EndInit();
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
-      this.groupBox1.ResumeLayout(false);
-      this.groupBox1.PerformLayout();
-      this.groupBox2.ResumeLayout(false);
-      this.groupBox2.PerformLayout();
+      this.tabControl1.ResumeLayout(false);
+      this.tabPage2.ResumeLayout(false);
+      this.tabPage2.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.elementSizeTrack)).EndInit();
-      this.groupBox3.ResumeLayout(false);
-      this.groupBox3.PerformLayout();
-      this.groupBox4.ResumeLayout(false);
-      this.groupBox4.PerformLayout();
+      this.tabPage3.ResumeLayout(false);
+      this.tabPage3.PerformLayout();
+      this.tabPage4.ResumeLayout(false);
+      this.tabPage4.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.dpiTicker)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -415,27 +442,18 @@
     #endregion
 
     private System.Windows.Forms.PictureBox graphTarget;
-    private System.Windows.Forms.ComboBox dataFrameHeader1;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.MenuStrip menuStrip1;
     private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     private System.Windows.Forms.OpenFileDialog openDataframeDialog;
-    private System.Windows.Forms.GroupBox groupBox1;
-    private System.Windows.Forms.GroupBox groupBox2;
-    private System.Windows.Forms.ComboBox graphDesign;
-    private System.Windows.Forms.Label label2;
-    private System.Windows.Forms.Label label3;
-    private System.Windows.Forms.TrackBar elementSizeTrack;
     private System.Windows.Forms.CheckBox confidenceInterval;
     private System.Windows.Forms.CheckBox trendLine;
-    private System.Windows.Forms.GroupBox groupBox3;
     private System.Windows.Forms.ComboBox modelSelect;
     private System.Windows.Forms.Label label5;
     private System.Windows.Forms.ComboBox dataFrameHeader2;
     private System.Windows.Forms.Label label4;
-    private System.Windows.Forms.GroupBox groupBox4;
     private System.Windows.Forms.TextBox xLabel;
     private System.Windows.Forms.Label label7;
     private System.Windows.Forms.TextBox yLabel;
@@ -444,6 +462,18 @@
     private System.Windows.Forms.TextBox titleText;
     private System.Windows.Forms.Label label8;
     private System.Windows.Forms.SaveFileDialog saveImageDialog;
+    private System.Windows.Forms.ColorDialog colorDialog1;
+    private System.Windows.Forms.TabControl tabControl1;
+    private System.Windows.Forms.TabPage tabPage3;
+    private System.Windows.Forms.TabPage tabPage4;
+    private System.Windows.Forms.TabPage tabPage2;
+    private System.Windows.Forms.Label label2;
+    private System.Windows.Forms.ComboBox graphDesign;
+    private System.Windows.Forms.Label label3;
+    private System.Windows.Forms.TrackBar elementSizeTrack;
+    private System.Windows.Forms.CheckedListBox dataFeatures;
+    private System.Windows.Forms.Label label9;
+    private System.Windows.Forms.TrackBar dpiTicker;
   }
 }
 
