@@ -35,6 +35,8 @@
       this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.rScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.rScriptToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
       this.openDataframeDialog = new System.Windows.Forms.OpenFileDialog();
       this.dataFrameHeader2 = new System.Windows.Forms.ComboBox();
       this.label4 = new System.Windows.Forms.Label();
@@ -59,9 +61,13 @@
       this.elementSizeTrack = new System.Windows.Forms.TrackBar();
       this.tabPage3 = new System.Windows.Forms.TabPage();
       this.tabPage4 = new System.Windows.Forms.TabPage();
-      this.dataFeatures = new System.Windows.Forms.CheckedListBox();
       this.label9 = new System.Windows.Forms.Label();
       this.dpiTicker = new System.Windows.Forms.TrackBar();
+      this.dataFeatures = new System.Windows.Forms.CheckedListBox();
+      this.saveScriptDialog = new System.Windows.Forms.SaveFileDialog();
+      this.openScriptDialog = new System.Windows.Forms.OpenFileDialog();
+      this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.tabControl1.SuspendLayout();
@@ -99,7 +105,8 @@
       // 
       this.menuStrip1.BackColor = System.Drawing.Color.Gainsboro;
       this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem});
       this.menuStrip1.Location = new System.Drawing.Point(0, 0);
       this.menuStrip1.Name = "menuStrip1";
       this.menuStrip1.Size = new System.Drawing.Size(1009, 24);
@@ -118,17 +125,33 @@
       // openToolStripMenuItem
       // 
       this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-      this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+      this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
       this.openToolStripMenuItem.Text = "Open";
       this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
       // 
       // saveToolStripMenuItem
       // 
+      this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rScriptToolStripMenuItem,
+            this.rScriptToolStripMenuItem1});
       this.saveToolStripMenuItem.Enabled = false;
       this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-      this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+      this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
       this.saveToolStripMenuItem.Text = "Save";
-      this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+      // 
+      // rScriptToolStripMenuItem
+      // 
+      this.rScriptToolStripMenuItem.Name = "rScriptToolStripMenuItem";
+      this.rScriptToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.rScriptToolStripMenuItem.Text = "Render";
+      this.rScriptToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+      // 
+      // rScriptToolStripMenuItem1
+      // 
+      this.rScriptToolStripMenuItem1.Name = "rScriptToolStripMenuItem1";
+      this.rScriptToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+      this.rScriptToolStripMenuItem1.Text = "R Script";
+      this.rScriptToolStripMenuItem1.Click += new System.EventHandler(this.rScriptToolStripMenuItem1_Click);
       // 
       // openDataframeDialog
       // 
@@ -373,16 +396,6 @@
       this.tabPage4.TabIndex = 3;
       this.tabPage4.Text = "Aesthetics";
       // 
-      // dataFeatures
-      // 
-      this.dataFeatures.Enabled = false;
-      this.dataFeatures.FormattingEnabled = true;
-      this.dataFeatures.Location = new System.Drawing.Point(15, 49);
-      this.dataFeatures.Name = "dataFeatures";
-      this.dataFeatures.Size = new System.Drawing.Size(185, 109);
-      this.dataFeatures.TabIndex = 13;
-      this.dataFeatures.SelectedIndexChanged += new System.EventHandler(this.dataFeatures_SelectedIndexChanged);
-      // 
       // label9
       // 
       this.label9.AutoSize = true;
@@ -405,6 +418,42 @@
       this.dpiTicker.TickFrequency = 10;
       this.dpiTicker.Value = 150;
       this.dpiTicker.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+      // 
+      // dataFeatures
+      // 
+      this.dataFeatures.Enabled = false;
+      this.dataFeatures.FormattingEnabled = true;
+      this.dataFeatures.Location = new System.Drawing.Point(15, 49);
+      this.dataFeatures.Name = "dataFeatures";
+      this.dataFeatures.Size = new System.Drawing.Size(185, 109);
+      this.dataFeatures.TabIndex = 13;
+      this.dataFeatures.SelectedIndexChanged += new System.EventHandler(this.dataFeatures_SelectedIndexChanged);
+      // 
+      // saveScriptDialog
+      // 
+      this.saveScriptDialog.DefaultExt = "png";
+      this.saveScriptDialog.Filter = "R Script|*.r";
+      this.saveScriptDialog.Title = "Save Rendering Script";
+      // 
+      // openScriptDialog
+      // 
+      this.openScriptDialog.Filter = "R Script|*.r";
+      this.openScriptDialog.Title = "Execute R Script on Workspace";
+      // 
+      // editToolStripMenuItem
+      // 
+      this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.scriptToolStripMenuItem});
+      this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+      this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+      this.editToolStripMenuItem.Text = "Edit";
+      // 
+      // scriptToolStripMenuItem
+      // 
+      this.scriptToolStripMenuItem.Enabled = false;
+      this.scriptToolStripMenuItem.Name = "scriptToolStripMenuItem";
+      this.scriptToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.scriptToolStripMenuItem.Text = "Script";
       // 
       // Form1
       // 
@@ -474,6 +523,12 @@
     private System.Windows.Forms.CheckedListBox dataFeatures;
     private System.Windows.Forms.Label label9;
     private System.Windows.Forms.TrackBar dpiTicker;
+    private System.Windows.Forms.ToolStripMenuItem rScriptToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem rScriptToolStripMenuItem1;
+    private System.Windows.Forms.SaveFileDialog saveScriptDialog;
+    private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+    private System.Windows.Forms.ToolStripMenuItem scriptToolStripMenuItem;
+    private System.Windows.Forms.OpenFileDialog openScriptDialog;
   }
 }
 

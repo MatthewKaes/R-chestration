@@ -21,6 +21,7 @@ namespace Conduct_R
     private Object drawLock = new Object();
     bool shouldRender = false;
     bool allowRender = false;
+    string dataFrameSource = null;
 
     public Form1()
     {
@@ -34,13 +35,7 @@ namespace Conduct_R
       rEngine.Initialize();
 
       // Install all of our required packages.
-      rEngine.Evaluate("list.of.packages <- c(\"ggplot2\", \"Cairo\")");
-      rEngine.Evaluate("new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,\"Package\"])]");
-      rEngine.Evaluate("if(length(new.packages)) install.packages(new.packages)");
-
-      // Use ggplot
-      rEngine.Evaluate("library(ggplot2)");
-      rEngine.Evaluate("library(Cairo");
+      rEngine.Evaluate(RPreamble());
     }
 
     private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -48,32 +43,19 @@ namespace Conduct_R
       DialogResult result = openDataframeDialog.ShowDialog(); 
       if (result == DialogResult.OK)
       {
-        string file = openDataframeDialog.FileName;
-        rDataFrame = DataFrameProcessor.LoadDataFrame(file);
+        dataFrameSource = openDataframeDialog.FileName;
+        rDataFrame = DataFrameProcessor.LoadDataFrame(dataFrameSource);
 
         if (rDataFrame.Keys.Count() == 0)
         {
           rDataFrame = null;
         }
 
-        processDataFrame();
+        ProcessDataFrame();
       }
     }
 
-    private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-    {
-      DialogResult result = saveImageDialog.ShowDialog();
-      if (result == DialogResult.OK)
-      {
-        if (File.Exists("plot.png"))
-        {
-          string file = saveImageDialog.FileName;
-          File.Copy("plot.png", file);
-        }
-      }
-    }
-
-    private void processDataFrame()
+    private void ProcessDataFrame()
     {
       if (rDataFrame != null)
       {
@@ -101,6 +83,73 @@ namespace Conduct_R
       }
     }
 
+    private string RPreamble()
+    {
+      string preamble = "";
+      // Install all of our required packages.
+      preamble += "list.of.packages <- c(\"ggplot2\", \"Cairo\")\n";
+      preamble += "new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,\"Package\"])]\n";
+      preamble += "if(length(new.packages)) install.packages(new.packages)\n";
+
+      // Use ggplot
+      preamble += "library(ggplot2)\n";
+      // Use Cairo
+      preamble += "library(Cairo)\n";
+
+      return preamble;
+    }
+
+    private string RLoader()
+    {
+      return "impData <- read.csv(file=\"" + dataFrameSource + "\",head=TRUE,sep=\",\")";
+    }
+
+    private string RGraphCommand()
+    {
+      string graphCommand = "p <- ggplot(impData)\n";
+      foreach (var item in dataFeatures.CheckedItems)
+      {
+        if (confidenceInterval.Checked)
+        {
+          graphCommand += "p <- p + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.99, alpha=0.25, linetype=0)\n";
+          graphCommand += "p <- p + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.95, alpha=0.25, linetype=0)\n";
+          graphCommand += "p <- p + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.68, alpha=0.25, linetype=0)\n";
+        }
+
+        if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
+        {
+          graphCommand += "p <- p + geom_point(size=" + elementSizeTrack.Value / 4.0 + ", aes(y=" + item + ", x=" + GetSequence() + "))\n";
+        }
+        else if (graphDesign.Text.Equals("Line", StringComparison.InvariantCultureIgnoreCase))
+        {
+          graphCommand += "p <- p + geom_line(size=" + elementSizeTrack.Value / 10.0 + ", aes(y=" + item + ", x=" + GetSequence() + "))\n";
+        }
+        else
+        {
+          graphCommand += "p <- p + geom_point(shape=1, aes(y=" + item + ", x=" + GetSequence() + "))\n";
+        }
+
+        if (trendLine.Checked)
+        {
+          graphCommand += "p <- p + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + ", alpha=0, size=1.2)\n";
+        }
+      }
+
+      // Add Aesthetics
+      graphCommand += "p <- p + labs(x=\"" + xLabel.Text + "\",y=\"" + yLabel.Text + "\")\n";
+      if (!string.IsNullOrEmpty(titleText.Text))
+      {
+        graphCommand += "p <- p + ggtitle(\"" + titleText.Text + "\")\n";
+      }
+
+      return graphCommand;
+    }
+
+    private string RSaveCommand()
+    {
+      return "ggsave(filename=\"plot.png\", plot=p, type = \"cairo-png\", width=" + (graphTarget.Width / (float)dpiTicker.Value) + ", height=" + (graphTarget.Height / (float)dpiTicker.Value) + ", units=\"in\", dpi=" + dpiTicker.Value + ")";
+    }
+
     private void RenderData()
     {
       if (dataFeatures.CheckedItems.Count == 0)
@@ -112,48 +161,11 @@ namespace Conduct_R
       try
       {
         rEngine.Evaluate("xLen <- seq(1, " + rDataFrame.First().Value.Count() + ")");
-
-        string graphCommand = "p <- ggplot(impData)";
-        foreach (var item in dataFeatures.CheckedItems)
-        {
-          if (confidenceInterval.Checked)
-          {
-            graphCommand += " + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.99, alpha=0.25, linetype=0)";
-            graphCommand += " + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.95, alpha=0.25, linetype=0)";
-            graphCommand += " + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.68, alpha=0.25, linetype=0)";
-          }
-
-          if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
-          {
-            graphCommand += " + geom_point(size=" + elementSizeTrack.Value / 4.0 + ", aes(y=" + item + ", x=" + GetSequence() + "))";
-          }
-          else if (graphDesign.Text.Equals("Line", StringComparison.InvariantCultureIgnoreCase))
-          {
-            graphCommand += " + geom_line(size=" + elementSizeTrack.Value / 10.0 + ", aes(y=" + item + ", x=" + GetSequence() + "))";
-          }
-          else
-          {
-            graphCommand += " + geom_point(shape=1, aes(y=" + item + ", x=" + GetSequence() + "))";
-          }
-
-          if (trendLine.Checked)
-          {
-            graphCommand += " + geom_smooth(aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + ", alpha=0, size=1.2)";
-          }
-        }
-
-        // Add Aesthetics
-        graphCommand += " + labs(x=\"" + xLabel.Text + "\",y=\"" + yLabel.Text + "\")";
-        if (!string.IsNullOrEmpty(titleText.Text))
-        {
-          graphCommand += " + ggtitle(\"" + titleText.Text + "\")";
-        }
-
-        rEngine.Evaluate(graphCommand);
+        rEngine.Evaluate(RGraphCommand());
 
         try
         {
-          rEngine.Evaluate("ggsave(filename=\"plot.png\", plot=p, type = \"cairo-png\", width=" + (graphTarget.Width / (float)dpiTicker.Value) + ", height=" + (graphTarget.Height / (float)dpiTicker.Value) + ", units=\"in\", dpi=" + dpiTicker.Value + ")");
+          rEngine.Evaluate(RSaveCommand());
         }
         catch{ }
       }
@@ -266,6 +278,11 @@ namespace Conduct_R
       shouldRender = true;
     }
 
+    private void dataFeatures_SelectedIndexChanged(object sender, EventArgs e)
+    {
+      RenderData();
+    }
+
     private void timer1_Tick(object sender, EventArgs e)
     {
       if (!allowRender)
@@ -282,11 +299,49 @@ namespace Conduct_R
         }
       }
     }
-
-    private void dataFeatures_SelectedIndexChanged(object sender, EventArgs e)
+    
+    private void saveToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      RenderData();
+      DialogResult result = saveImageDialog.ShowDialog();
+      if (result == DialogResult.OK)
+      {
+        if (File.Exists("plot.png"))
+        {
+          string file = saveImageDialog.FileName;
+          File.Copy("plot.png", file);
+        }
+      }
     }
 
+    private void rScriptToolStripMenuItem1_Click(object sender, EventArgs e)
+    {
+      DialogResult result = saveScriptDialog.ShowDialog();
+      if (result == DialogResult.OK)
+      {
+        string file = saveImageDialog.FileName;
+
+        using (StreamWriter rWriter = new StreamWriter(file))
+        {
+          rWriter.WriteLine(RPreamble());
+          rWriter.WriteLine(RLoader());
+          rWriter.WriteLine();
+          rWriter.WriteLine(RGraphCommand());
+          rWriter.WriteLine(RSaveCommand());
+        }
+      }
+    }
+
+    private void scriptToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+      DialogResult result = openScriptDialog.ShowDialog();
+      if (result == DialogResult.OK)
+      {
+        string file = saveImageDialog.FileName;
+        if (File.Exists(file))
+        {
+          rEngine.Evaluate(string.Join(Environment.NewLine, File.ReadAllLines(file)));
+        }
+      }
+    }
   }
 }
