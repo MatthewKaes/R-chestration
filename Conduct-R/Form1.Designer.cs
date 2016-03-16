@@ -494,7 +494,7 @@
       this.Controls.Add(this.menuStrip1);
       this.Controls.Add(this.label1);
       this.MainMenuStrip = this.menuStrip1;
-      this.MaximumSize = new System.Drawing.Size(1025, 597);
+      this.MinimumSize = new System.Drawing.Size(1025, 597);
       this.Name = "Form1";
       this.Text = "Conduct-R";
       this.ResizeEnd += new System.EventHandler(this.FlagForRender);
@@ -519,7 +519,6 @@
 
     #endregion
 
-    private System.Windows.Forms.PictureBox graphTarget;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.MenuStrip menuStrip1;
     private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
@@ -560,6 +559,7 @@
     private System.Windows.Forms.OpenFileDialog openScriptDialog;
     private System.Windows.Forms.TabPage tabPage1;
     private System.Windows.Forms.CheckBox colorizeCheck;
+    internal System.Windows.Forms.PictureBox graphTarget;
   }
 }
 
