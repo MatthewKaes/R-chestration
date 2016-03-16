@@ -37,6 +37,8 @@
       this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.rScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.rScriptToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+      this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.openDataframeDialog = new System.Windows.Forms.OpenFileDialog();
       this.dataFrameHeader2 = new System.Windows.Forms.ComboBox();
       this.label4 = new System.Windows.Forms.Label();
@@ -63,11 +65,11 @@
       this.tabPage4 = new System.Windows.Forms.TabPage();
       this.label9 = new System.Windows.Forms.Label();
       this.dpiTicker = new System.Windows.Forms.TrackBar();
+      this.tabPage1 = new System.Windows.Forms.TabPage();
+      this.colorizeCheck = new System.Windows.Forms.CheckBox();
       this.dataFeatures = new System.Windows.Forms.CheckedListBox();
       this.saveScriptDialog = new System.Windows.Forms.SaveFileDialog();
       this.openScriptDialog = new System.Windows.Forms.OpenFileDialog();
-      this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.tabControl1.SuspendLayout();
@@ -76,6 +78,7 @@
       this.tabPage3.SuspendLayout();
       this.tabPage4.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dpiTicker)).BeginInit();
+      this.tabPage1.SuspendLayout();
       this.SuspendLayout();
       // 
       // graphTarget
@@ -125,7 +128,7 @@
       // openToolStripMenuItem
       // 
       this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-      this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
       this.openToolStripMenuItem.Text = "Open";
       this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
       // 
@@ -136,22 +139,37 @@
             this.rScriptToolStripMenuItem1});
       this.saveToolStripMenuItem.Enabled = false;
       this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-      this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
       this.saveToolStripMenuItem.Text = "Save";
       // 
       // rScriptToolStripMenuItem
       // 
       this.rScriptToolStripMenuItem.Name = "rScriptToolStripMenuItem";
-      this.rScriptToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+      this.rScriptToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
       this.rScriptToolStripMenuItem.Text = "Render";
       this.rScriptToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
       // 
       // rScriptToolStripMenuItem1
       // 
       this.rScriptToolStripMenuItem1.Name = "rScriptToolStripMenuItem1";
-      this.rScriptToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+      this.rScriptToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
       this.rScriptToolStripMenuItem1.Text = "R Script";
       this.rScriptToolStripMenuItem1.Click += new System.EventHandler(this.rScriptToolStripMenuItem1_Click);
+      // 
+      // editToolStripMenuItem
+      // 
+      this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.scriptToolStripMenuItem});
+      this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+      this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+      this.editToolStripMenuItem.Text = "Edit";
+      // 
+      // scriptToolStripMenuItem
+      // 
+      this.scriptToolStripMenuItem.Enabled = false;
+      this.scriptToolStripMenuItem.Name = "scriptToolStripMenuItem";
+      this.scriptToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+      this.scriptToolStripMenuItem.Text = "Script";
       // 
       // openDataframeDialog
       // 
@@ -187,7 +205,7 @@
       this.trendLine.TabIndex = 7;
       this.trendLine.Text = "Trend Line";
       this.trendLine.UseVisualStyleBackColor = true;
-      this.trendLine.CheckedChanged += new System.EventHandler(this.trendLine_CheckedChanged);
+      this.trendLine.CheckedChanged += new System.EventHandler(this.FlagForRender);
       // 
       // confidenceInterval
       // 
@@ -198,7 +216,7 @@
       this.confidenceInterval.TabIndex = 6;
       this.confidenceInterval.Text = "Confidence Interval";
       this.confidenceInterval.UseVisualStyleBackColor = true;
-      this.confidenceInterval.CheckedChanged += new System.EventHandler(this.confidenceInterval_CheckedChanged);
+      this.confidenceInterval.CheckedChanged += new System.EventHandler(this.FlagForRender);
       // 
       // modelSelect
       // 
@@ -217,7 +235,7 @@
       this.modelSelect.Name = "modelSelect";
       this.modelSelect.Size = new System.Drawing.Size(135, 21);
       this.modelSelect.TabIndex = 2;
-      this.modelSelect.SelectedIndexChanged += new System.EventHandler(this.modelSelect_SelectedIndexChanged);
+      this.modelSelect.SelectedIndexChanged += new System.EventHandler(this.FlagForRender);
       // 
       // label5
       // 
@@ -234,7 +252,7 @@
       this.titleText.Name = "titleText";
       this.titleText.Size = new System.Drawing.Size(137, 20);
       this.titleText.TabIndex = 8;
-      this.titleText.TextChanged += new System.EventHandler(this.titleText_TextChanged);
+      this.titleText.TextChanged += new System.EventHandler(this.FlagForRender);
       // 
       // label8
       // 
@@ -251,7 +269,7 @@
       this.xLabel.Name = "xLabel";
       this.xLabel.Size = new System.Drawing.Size(144, 20);
       this.xLabel.TabIndex = 6;
-      this.xLabel.TextChanged += new System.EventHandler(this.yLabel_TextChanged);
+      this.xLabel.TextChanged += new System.EventHandler(this.FlagForRender);
       // 
       // label7
       // 
@@ -268,7 +286,7 @@
       this.yLabel.Name = "yLabel";
       this.yLabel.Size = new System.Drawing.Size(144, 20);
       this.yLabel.TabIndex = 4;
-      this.yLabel.TextChanged += new System.EventHandler(this.xLabel_TextChanged);
+      this.yLabel.TextChanged += new System.EventHandler(this.FlagForRender);
       // 
       // label6
       // 
@@ -298,6 +316,7 @@
       this.tabControl1.Controls.Add(this.tabPage2);
       this.tabControl1.Controls.Add(this.tabPage3);
       this.tabControl1.Controls.Add(this.tabPage4);
+      this.tabControl1.Controls.Add(this.tabPage1);
       this.tabControl1.Location = new System.Drawing.Point(400, 27);
       this.tabControl1.Name = "tabControl1";
       this.tabControl1.SelectedIndex = 0;
@@ -341,7 +360,7 @@
       this.graphDesign.Name = "graphDesign";
       this.graphDesign.Size = new System.Drawing.Size(135, 21);
       this.graphDesign.TabIndex = 2;
-      this.graphDesign.SelectedIndexChanged += new System.EventHandler(this.graphDesign_SelectedIndexChanged);
+      this.graphDesign.SelectedIndexChanged += new System.EventHandler(this.FlagForRender);
       // 
       // label3
       // 
@@ -364,7 +383,7 @@
       this.elementSizeTrack.TabIndex = 4;
       this.elementSizeTrack.TickFrequency = 5;
       this.elementSizeTrack.Value = 20;
-      this.elementSizeTrack.Scroll += new System.EventHandler(this.elementSizeTrack_Scroll);
+      this.elementSizeTrack.Scroll += new System.EventHandler(this.FlagForRender);
       // 
       // tabPage3
       // 
@@ -417,7 +436,29 @@
       this.dpiTicker.TabIndex = 9;
       this.dpiTicker.TickFrequency = 10;
       this.dpiTicker.Value = 150;
-      this.dpiTicker.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+      this.dpiTicker.Scroll += new System.EventHandler(this.FlagForRender);
+      // 
+      // tabPage1
+      // 
+      this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+      this.tabPage1.Controls.Add(this.colorizeCheck);
+      this.tabPage1.Location = new System.Drawing.Point(4, 22);
+      this.tabPage1.Name = "tabPage1";
+      this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage1.Size = new System.Drawing.Size(589, 107);
+      this.tabPage1.TabIndex = 4;
+      this.tabPage1.Text = "Color";
+      // 
+      // colorizeCheck
+      // 
+      this.colorizeCheck.AutoSize = true;
+      this.colorizeCheck.Location = new System.Drawing.Point(12, 28);
+      this.colorizeCheck.Name = "colorizeCheck";
+      this.colorizeCheck.Size = new System.Drawing.Size(63, 17);
+      this.colorizeCheck.TabIndex = 7;
+      this.colorizeCheck.Text = "Colorize";
+      this.colorizeCheck.UseVisualStyleBackColor = true;
+      this.colorizeCheck.CheckedChanged += new System.EventHandler(this.FlagForRender);
       // 
       // dataFeatures
       // 
@@ -427,7 +468,7 @@
       this.dataFeatures.Name = "dataFeatures";
       this.dataFeatures.Size = new System.Drawing.Size(185, 109);
       this.dataFeatures.TabIndex = 13;
-      this.dataFeatures.SelectedIndexChanged += new System.EventHandler(this.dataFeatures_SelectedIndexChanged);
+      this.dataFeatures.SelectedIndexChanged += new System.EventHandler(this.FlagForRender);
       // 
       // saveScriptDialog
       // 
@@ -439,21 +480,6 @@
       // 
       this.openScriptDialog.Filter = "R Script|*.r";
       this.openScriptDialog.Title = "Execute R Script on Workspace";
-      // 
-      // editToolStripMenuItem
-      // 
-      this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.scriptToolStripMenuItem});
-      this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-      this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-      this.editToolStripMenuItem.Text = "Edit";
-      // 
-      // scriptToolStripMenuItem
-      // 
-      this.scriptToolStripMenuItem.Enabled = false;
-      this.scriptToolStripMenuItem.Name = "scriptToolStripMenuItem";
-      this.scriptToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-      this.scriptToolStripMenuItem.Text = "Script";
       // 
       // Form1
       // 
@@ -468,9 +494,10 @@
       this.Controls.Add(this.menuStrip1);
       this.Controls.Add(this.label1);
       this.MainMenuStrip = this.menuStrip1;
+      this.MaximumSize = new System.Drawing.Size(1025, 597);
       this.Name = "Form1";
       this.Text = "Conduct-R";
-      this.ResizeEnd += new System.EventHandler(this.ResizeRedrawRender);
+      this.ResizeEnd += new System.EventHandler(this.FlagForRender);
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).EndInit();
       this.menuStrip1.ResumeLayout(false);
       this.menuStrip1.PerformLayout();
@@ -483,6 +510,8 @@
       this.tabPage4.ResumeLayout(false);
       this.tabPage4.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dpiTicker)).EndInit();
+      this.tabPage1.ResumeLayout(false);
+      this.tabPage1.PerformLayout();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -529,6 +558,8 @@
     private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
     private System.Windows.Forms.ToolStripMenuItem scriptToolStripMenuItem;
     private System.Windows.Forms.OpenFileDialog openScriptDialog;
+    private System.Windows.Forms.TabPage tabPage1;
+    private System.Windows.Forms.CheckBox colorizeCheck;
   }
 }
 
