@@ -136,15 +136,15 @@ namespace Conduct_R
 
       if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
       {
-        graphCommand += "p <- p + geom_point(size=" + elementSizeTrack.Value / 4.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + "))\n";
+        graphCommand += "p <- p + geom_point(size=" + elementSizeTrack.Value / 4.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable))\n";
       }
       else if (graphDesign.Text.Equals("Line", StringComparison.InvariantCultureIgnoreCase))
       {
-        graphCommand += "p <- p + geom_line(size=" + elementSizeTrack.Value / 10.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + "))\n";
+        graphCommand += "p <- p + geom_line(size=" + elementSizeTrack.Value / 10.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable))\n";
       }
       else
       {
-        graphCommand += "p <- p + geom_point(shape=1, aes(y=value, x=" + GetSequence() + GetColorize() + "))\n";
+        graphCommand += "p <- p + geom_point(shape=1, aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable))\n";
       }
 
       // Postprocess
