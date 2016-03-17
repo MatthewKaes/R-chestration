@@ -68,6 +68,7 @@ namespace Conduct_R
         dataFrameHeader2.Items.Add("Time Sequence");
         dataFrameHeader2.Items.AddRange(sortedKeys.ToArray());
         dataFrameHeader2.SelectedIndex = 0;
+        paletteSelector.SelectedIndex = 0;
         dataFrameHeader2.Enabled = true;
         elementSizeTrack.Enabled = true;
         saveToolStripMenuItem.Enabled = true;
@@ -154,6 +155,12 @@ namespace Conduct_R
         {
           graphCommand += "p <- p + geom_smooth(data=impData, aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + ", alpha=0, size=1.2)\n";
         }
+      }
+
+      // Colorize
+      if (colorizeCheck.Checked)
+      {
+        graphCommand += "p <- p + scale_colour_brewer(palette=\"" + paletteSelector.Text + "\")\n";
       }
 
       // Add Aesthetics

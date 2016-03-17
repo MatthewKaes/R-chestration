@@ -66,6 +66,8 @@
       this.label9 = new System.Windows.Forms.Label();
       this.dpiTicker = new System.Windows.Forms.TrackBar();
       this.tabPage1 = new System.Windows.Forms.TabPage();
+      this.paletteSelector = new System.Windows.Forms.ComboBox();
+      this.label10 = new System.Windows.Forms.Label();
       this.colorizeCheck = new System.Windows.Forms.CheckBox();
       this.dataFeatures = new System.Windows.Forms.CheckedListBox();
       this.saveScriptDialog = new System.Windows.Forms.SaveFileDialog();
@@ -441,6 +443,8 @@
       // tabPage1
       // 
       this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+      this.tabPage1.Controls.Add(this.paletteSelector);
+      this.tabPage1.Controls.Add(this.label10);
       this.tabPage1.Controls.Add(this.colorizeCheck);
       this.tabPage1.Location = new System.Drawing.Point(4, 22);
       this.tabPage1.Name = "tabPage1";
@@ -449,10 +453,69 @@
       this.tabPage1.TabIndex = 4;
       this.tabPage1.Text = "Color";
       // 
+      // paletteSelector
+      // 
+      this.paletteSelector.AutoCompleteCustomSource.AddRange(new string[] {
+            "Scatter",
+            "Line"});
+      this.paletteSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.paletteSelector.FormattingEnabled = true;
+      this.paletteSelector.Items.AddRange(new object[] {
+            "Accent",
+            "Blues",
+            "BrBG",
+            "BuGn",
+            "BuPu",
+            "Dark2",
+            "GnBu",
+            "Greens",
+            "Greys",
+            "Oranges",
+            "OrRd",
+            "Paired",
+            "Pastel1",
+            "Pastel2",
+            "PiYG",
+            "PRGn",
+            "PuBu",
+            "PuBuGn",
+            "PuOr",
+            "PuRd",
+            "Purples",
+            "RdBu",
+            "RdGy",
+            "RdPu",
+            "RdYlBu",
+            "RdYlGn",
+            "Reds",
+            "Set1",
+            "Set2",
+            "Set3",
+            "Spectral",
+            "YlGn",
+            "YlGnBu",
+            "YlOrBr",
+            "YlOrRd"});
+      this.paletteSelector.Location = new System.Drawing.Point(12, 46);
+      this.paletteSelector.Name = "paletteSelector";
+      this.paletteSelector.Size = new System.Drawing.Size(135, 21);
+      this.paletteSelector.Sorted = true;
+      this.paletteSelector.TabIndex = 8;
+      this.paletteSelector.SelectedIndexChanged += new System.EventHandler(this.FlagForRender);
+      // 
+      // label10
+      // 
+      this.label10.AutoSize = true;
+      this.label10.Location = new System.Drawing.Point(12, 30);
+      this.label10.Name = "label10";
+      this.label10.Size = new System.Drawing.Size(45, 13);
+      this.label10.TabIndex = 9;
+      this.label10.Text = "Palettes";
+      // 
       // colorizeCheck
       // 
       this.colorizeCheck.AutoSize = true;
-      this.colorizeCheck.Location = new System.Drawing.Point(12, 28);
+      this.colorizeCheck.Location = new System.Drawing.Point(12, 9);
       this.colorizeCheck.Name = "colorizeCheck";
       this.colorizeCheck.Size = new System.Drawing.Size(63, 17);
       this.colorizeCheck.TabIndex = 7;
@@ -560,6 +623,8 @@
     private System.Windows.Forms.TabPage tabPage1;
     private System.Windows.Forms.CheckBox colorizeCheck;
     internal System.Windows.Forms.PictureBox graphTarget;
+    private System.Windows.Forms.ComboBox paletteSelector;
+    private System.Windows.Forms.Label label10;
   }
 }
 
