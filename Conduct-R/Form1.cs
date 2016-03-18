@@ -151,6 +151,10 @@ namespace Conduct_R
       {
         graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "))\n";
       }
+      else if (graphDesign.Text.Equals("Fill", StringComparison.InvariantCultureIgnoreCase))
+      {
+        graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "), position=\"fill\")\n";
+      }
       else
       {
         graphCommand += "p <- p + geom_point(shape=1, aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable))\n";
@@ -168,8 +172,9 @@ namespace Conduct_R
       // Colorize
       if (colorizeCheck.Checked)
       {
-        if (graphDesign.Text.Equals("Area", StringComparison.InvariantCultureIgnoreCase) &&
-            graphDesign.Text.Equals("Stacked", StringComparison.InvariantCultureIgnoreCase))
+        if (graphDesign.Text.Equals("Area", StringComparison.InvariantCultureIgnoreCase) ||
+            graphDesign.Text.Equals("Stacked", StringComparison.InvariantCultureIgnoreCase) ||
+            graphDesign.Text.Equals("Fill", StringComparison.InvariantCultureIgnoreCase))
         {
           graphCommand += "p <- p + scale_fill_brewer(palette=\"" + paletteSelector.Text + "\")\n";
         }

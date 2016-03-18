@@ -359,7 +359,8 @@
             "Scatter",
             "Line",
             "Area",
-            "Stacked"});
+            "Stacked",
+            "Fill"});
       this.graphDesign.Location = new System.Drawing.Point(6, 26);
       this.graphDesign.Name = "graphDesign";
       this.graphDesign.Size = new System.Drawing.Size(135, 21);
