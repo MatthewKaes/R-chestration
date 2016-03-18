@@ -143,6 +143,10 @@ namespace Conduct_R
       {
         graphCommand += "p <- p + geom_line(size=" + elementSizeTrack.Value / 10.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable))\n";
       }
+      else if (graphDesign.Text.Equals("Area", StringComparison.InvariantCultureIgnoreCase))
+      {
+        graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "))\n";
+      }
       else
       {
         graphCommand += "p <- p + geom_point(shape=1, aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable))\n";
@@ -160,7 +164,14 @@ namespace Conduct_R
       // Colorize
       if (colorizeCheck.Checked)
       {
-        graphCommand += "p <- p + scale_colour_brewer(palette=\"" + paletteSelector.Text + "\")\n";
+        if (graphDesign.Text.Equals("Area", StringComparison.InvariantCultureIgnoreCase))
+        {
+          graphCommand += "p <- p + scale_fill_brewer(palette=\"" + paletteSelector.Text + "\")\n";
+        }
+        else
+        {
+          graphCommand += "p <- p + scale_colour_brewer(palette=\"" + paletteSelector.Text + "\")\n";
+        }
       }
 
       // Add Aesthetics
@@ -252,6 +263,18 @@ namespace Conduct_R
       if (colorizeCheck.Checked)
       {
         return ", color=variable";
+      }
+      else
+      {
+        return "";
+      }
+    }
+
+    private string GetFiller()
+    {
+      if (colorizeCheck.Checked)
+      {
+        return ", fill=variable";
       }
       else
       {
