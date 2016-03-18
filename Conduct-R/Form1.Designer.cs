@@ -57,6 +57,8 @@
       this.colorDialog1 = new System.Windows.Forms.ColorDialog();
       this.tabControl1 = new System.Windows.Forms.TabControl();
       this.tabPage2 = new System.Windows.Forms.TabPage();
+      this.label11 = new System.Windows.Forms.Label();
+      this.elementAlphaTrack = new System.Windows.Forms.TrackBar();
       this.label2 = new System.Windows.Forms.Label();
       this.graphDesign = new System.Windows.Forms.ComboBox();
       this.label3 = new System.Windows.Forms.Label();
@@ -76,6 +78,7 @@
       this.menuStrip1.SuspendLayout();
       this.tabControl1.SuspendLayout();
       this.tabPage2.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.elementAlphaTrack)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.elementSizeTrack)).BeginInit();
       this.tabPage3.SuspendLayout();
       this.tabPage4.SuspendLayout();
@@ -328,6 +331,8 @@
       // tabPage2
       // 
       this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
+      this.tabPage2.Controls.Add(this.label11);
+      this.tabPage2.Controls.Add(this.elementAlphaTrack);
       this.tabPage2.Controls.Add(this.label2);
       this.tabPage2.Controls.Add(this.graphDesign);
       this.tabPage2.Controls.Add(this.label3);
@@ -338,6 +343,28 @@
       this.tabPage2.Size = new System.Drawing.Size(589, 107);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "Style";
+      // 
+      // label11
+      // 
+      this.label11.AutoSize = true;
+      this.label11.Location = new System.Drawing.Point(325, 10);
+      this.label11.Name = "label11";
+      this.label11.Size = new System.Drawing.Size(75, 13);
+      this.label11.TabIndex = 7;
+      this.label11.Text = "Element Alpha";
+      // 
+      // elementAlphaTrack
+      // 
+      this.elementAlphaTrack.Location = new System.Drawing.Point(316, 26);
+      this.elementAlphaTrack.Maximum = 100;
+      this.elementAlphaTrack.Minimum = 10;
+      this.elementAlphaTrack.Name = "elementAlphaTrack";
+      this.elementAlphaTrack.Size = new System.Drawing.Size(163, 45);
+      this.elementAlphaTrack.SmallChange = 5;
+      this.elementAlphaTrack.TabIndex = 6;
+      this.elementAlphaTrack.TickFrequency = 5;
+      this.elementAlphaTrack.Value = 100;
+      this.elementAlphaTrack.Scroll += new System.EventHandler(this.FlagForRender);
       // 
       // label2
       // 
@@ -570,6 +597,7 @@
       this.tabControl1.ResumeLayout(false);
       this.tabPage2.ResumeLayout(false);
       this.tabPage2.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.elementAlphaTrack)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.elementSizeTrack)).EndInit();
       this.tabPage3.ResumeLayout(false);
       this.tabPage3.PerformLayout();
@@ -628,6 +656,8 @@
     internal System.Windows.Forms.PictureBox graphTarget;
     private System.Windows.Forms.ComboBox paletteSelector;
     private System.Windows.Forms.Label label10;
+    private System.Windows.Forms.Label label11;
+    private System.Windows.Forms.TrackBar elementAlphaTrack;
   }
 }
 

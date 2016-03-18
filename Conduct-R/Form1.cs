@@ -137,27 +137,27 @@ namespace Conduct_R
 
       if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
       {
-        graphCommand += "p <- p + geom_point(size=" + elementSizeTrack.Value / 4.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable))\n";
+        graphCommand += "p <- p + geom_point(size=" + elementSizeTrack.Value / 4.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable), alpha=" + elementAlphaTrack.Value / 100.0 + ")\n";
       }
       else if (graphDesign.Text.Equals("Line", StringComparison.InvariantCultureIgnoreCase))
       {
-        graphCommand += "p <- p + geom_line(size=" + elementSizeTrack.Value / 10.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable))\n";
+        graphCommand += "p <- p + geom_line(size=" + elementSizeTrack.Value / 10.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable), alpha=" + elementAlphaTrack.Value / 100.0 + ")\n";
       }
       else if (graphDesign.Text.Equals("Area", StringComparison.InvariantCultureIgnoreCase))
       {
-        graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "), position=\"dodge\")\n";
+        graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "), position=\"dodge\", alpha=" + elementAlphaTrack.Value / 100.0 + ")\n";
       }
       else if (graphDesign.Text.Equals("Stacked", StringComparison.InvariantCultureIgnoreCase))
       {
-        graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "))\n";
+        graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "), alpha=" + elementAlphaTrack.Value / 100.0 + ")\n";
       }
       else if (graphDesign.Text.Equals("Fill", StringComparison.InvariantCultureIgnoreCase))
       {
-        graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "), position=\"fill\")\n";
+        graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "), position=\"fill\", alpha=" + elementAlphaTrack.Value / 100.0 + ")\n";
       }
       else
       {
-        graphCommand += "p <- p + geom_point(shape=1, aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable))\n";
+        graphCommand += "p <- p + geom_point(shape=1, aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable), alpha=" + elementAlphaTrack.Value / 100.0 + ")\n";
       }
 
       // Postprocess
