@@ -145,6 +145,10 @@ namespace Conduct_R
       }
       else if (graphDesign.Text.Equals("Area", StringComparison.InvariantCultureIgnoreCase))
       {
+        graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "), position=\"dodge\")\n";
+      }
+      else if (graphDesign.Text.Equals("Stacked", StringComparison.InvariantCultureIgnoreCase))
+      {
         graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "))\n";
       }
       else
@@ -164,7 +168,8 @@ namespace Conduct_R
       // Colorize
       if (colorizeCheck.Checked)
       {
-        if (graphDesign.Text.Equals("Area", StringComparison.InvariantCultureIgnoreCase))
+        if (graphDesign.Text.Equals("Area", StringComparison.InvariantCultureIgnoreCase) &&
+            graphDesign.Text.Equals("Stacked", StringComparison.InvariantCultureIgnoreCase))
         {
           graphCommand += "p <- p + scale_fill_brewer(palette=\"" + paletteSelector.Text + "\")\n";
         }
