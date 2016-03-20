@@ -40,7 +40,7 @@ namespace Conduct_R
 
     private void openToolStripMenuItem_Click(object sender, EventArgs e)
     {
-      DialogResult result = openDataframeDialog.ShowDialog(); 
+      DialogResult result = openDataframeDialog.ShowDialog();
       if (result == DialogResult.OK)
       {
         dataFrameSource = openDataframeDialog.FileName;
@@ -185,11 +185,14 @@ namespace Conduct_R
       }
 
       // Add Aesthetics
+      string backgroundHex = string.Format("#{0:X2}{1:X2}{2:X2}", (int)backgroundRed.Value, (int)backgroundGreen.Value, (int)backgroundBlue.Value);
       graphCommand += "p <- p + labs(x=\"" + xLabel.Text + "\",y=\"" + yLabel.Text + "\")\n";
+      graphCommand += "p <- p + theme(plot.background = element_rect(fill = '" + backgroundHex + "'))\n";
       if (!string.IsNullOrEmpty(titleText.Text))
       {
         graphCommand += "p <- p + ggtitle(\"" + titleText.Text + "\")\n";
       }
+
 
       return graphCommand;
     }
@@ -217,7 +220,7 @@ namespace Conduct_R
         {
           rEngine.Evaluate(RSaveCommand());
         }
-        catch{ }
+        catch { }
       }
       finally
       {
@@ -311,14 +314,14 @@ namespace Conduct_R
 
       if (shouldRender && rDataFrame != null)
       {
-        lock(drawLock)
+        lock (drawLock)
         {
           shouldRender = false;
           RenderData();
         }
       }
     }
-    
+
     private void saveToolStripMenuItem_Click(object sender, EventArgs e)
     {
       DialogResult result = saveImageDialog.ShowDialog();
