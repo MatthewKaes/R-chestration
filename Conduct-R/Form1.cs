@@ -148,6 +148,10 @@ namespace Conduct_R
       {
         graphCommand += "p <- p + geom_line(size=" + elementSizeTrack.Value / 10.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable), alpha=" + elementAlphaTrack.Value / 100.0 + ")\n";
       }
+      else if (graphDesign.Text.Equals("Spline", StringComparison.InvariantCultureIgnoreCase))
+      {
+        graphCommand += "p <- p + geom_line(size=" + elementSizeTrack.Value / 10.0 + ", aes(y=value, x=" + GetSequence() + GetColorize() + ", group=variable), stat=\"smooth\", method=loess, alpha=" + elementAlphaTrack.Value / 100.0 + ")\n";
+      }
       else if (graphDesign.Text.Equals("Area", StringComparison.InvariantCultureIgnoreCase))
       {
         graphCommand += "p <- p + geom_area(aes(y=value, x=" + GetSequence() + ", group=variable" + GetFiller() + "), position=\"dodge\", alpha=" + elementAlphaTrack.Value / 100.0 + ")\n";

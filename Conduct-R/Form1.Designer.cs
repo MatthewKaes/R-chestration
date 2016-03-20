@@ -63,6 +63,7 @@
       this.label3 = new System.Windows.Forms.Label();
       this.elementSizeTrack = new System.Windows.Forms.TrackBar();
       this.tabPage3 = new System.Windows.Forms.TabPage();
+      this.densityPlot = new System.Windows.Forms.CheckBox();
       this.tabPage4 = new System.Windows.Forms.TabPage();
       this.label9 = new System.Windows.Forms.Label();
       this.dpiTicker = new System.Windows.Forms.TrackBar();
@@ -84,7 +85,6 @@
       this.dataFeatures = new System.Windows.Forms.CheckedListBox();
       this.saveScriptDialog = new System.Windows.Forms.SaveFileDialog();
       this.openScriptDialog = new System.Windows.Forms.OpenFileDialog();
-      this.densityPlot = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.tabControl1.SuspendLayout();
@@ -402,6 +402,7 @@
       this.graphDesign.Items.AddRange(new object[] {
             "Scatter",
             "Line",
+            "Spline",
             "Area",
             "Stacked",
             "Fill"});
@@ -447,6 +448,17 @@
       this.tabPage3.Size = new System.Drawing.Size(636, 107);
       this.tabPage3.TabIndex = 2;
       this.tabPage3.Text = "Analytics";
+      // 
+      // densityPlot
+      // 
+      this.densityPlot.AutoSize = true;
+      this.densityPlot.Location = new System.Drawing.Point(368, 28);
+      this.densityPlot.Name = "densityPlot";
+      this.densityPlot.Size = new System.Drawing.Size(82, 17);
+      this.densityPlot.TabIndex = 8;
+      this.densityPlot.Text = "Density Plot";
+      this.densityPlot.UseVisualStyleBackColor = true;
+      this.densityPlot.CheckedChanged += new System.EventHandler(this.FlagForRender);
       // 
       // tabPage4
       // 
@@ -755,17 +767,6 @@
       // 
       this.openScriptDialog.Filter = "R Script|*.r";
       this.openScriptDialog.Title = "Execute R Script on Workspace";
-      // 
-      // densityPlot
-      // 
-      this.densityPlot.AutoSize = true;
-      this.densityPlot.Location = new System.Drawing.Point(368, 28);
-      this.densityPlot.Name = "densityPlot";
-      this.densityPlot.Size = new System.Drawing.Size(82, 17);
-      this.densityPlot.TabIndex = 8;
-      this.densityPlot.Text = "Density Plot";
-      this.densityPlot.UseVisualStyleBackColor = true;
-      this.densityPlot.CheckedChanged += new System.EventHandler(this.FlagForRender);
       // 
       // Form1
       // 
