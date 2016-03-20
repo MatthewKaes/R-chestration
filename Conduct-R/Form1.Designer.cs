@@ -54,7 +54,6 @@
       this.label6 = new System.Windows.Forms.Label();
       this.timer1 = new System.Windows.Forms.Timer(this.components);
       this.saveImageDialog = new System.Windows.Forms.SaveFileDialog();
-      this.colorDialog1 = new System.Windows.Forms.ColorDialog();
       this.tabControl1 = new System.Windows.Forms.TabControl();
       this.tabPage2 = new System.Windows.Forms.TabPage();
       this.label11 = new System.Windows.Forms.Label();
@@ -67,20 +66,24 @@
       this.tabPage4 = new System.Windows.Forms.TabPage();
       this.label9 = new System.Windows.Forms.Label();
       this.dpiTicker = new System.Windows.Forms.TrackBar();
+      this.tabPage1 = new System.Windows.Forms.TabPage();
+      this.foregroundBlue = new System.Windows.Forms.NumericUpDown();
+      this.foregroundGreen = new System.Windows.Forms.NumericUpDown();
+      this.foregroundRed = new System.Windows.Forms.NumericUpDown();
+      this.label16 = new System.Windows.Forms.Label();
+      this.label15 = new System.Windows.Forms.Label();
+      this.label14 = new System.Windows.Forms.Label();
+      this.backgroundBlue = new System.Windows.Forms.NumericUpDown();
+      this.label12 = new System.Windows.Forms.Label();
+      this.paletteSelector = new System.Windows.Forms.ComboBox();
+      this.label10 = new System.Windows.Forms.Label();
+      this.colorizeCheck = new System.Windows.Forms.CheckBox();
+      this.label13 = new System.Windows.Forms.Label();
+      this.backgroundGreen = new System.Windows.Forms.NumericUpDown();
+      this.backgroundRed = new System.Windows.Forms.NumericUpDown();
       this.dataFeatures = new System.Windows.Forms.CheckedListBox();
       this.saveScriptDialog = new System.Windows.Forms.SaveFileDialog();
       this.openScriptDialog = new System.Windows.Forms.OpenFileDialog();
-      this.colorizeCheck = new System.Windows.Forms.CheckBox();
-      this.label10 = new System.Windows.Forms.Label();
-      this.paletteSelector = new System.Windows.Forms.ComboBox();
-      this.label12 = new System.Windows.Forms.Label();
-      this.backgroundBlue = new System.Windows.Forms.NumericUpDown();
-      this.label14 = new System.Windows.Forms.Label();
-      this.label15 = new System.Windows.Forms.Label();
-      this.tabPage1 = new System.Windows.Forms.TabPage();
-      this.backgroundRed = new System.Windows.Forms.NumericUpDown();
-      this.backgroundGreen = new System.Windows.Forms.NumericUpDown();
-      this.label13 = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.tabControl1.SuspendLayout();
@@ -90,10 +93,13 @@
       this.tabPage3.SuspendLayout();
       this.tabPage4.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dpiTicker)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.backgroundBlue)).BeginInit();
       this.tabPage1.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.backgroundRed)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.foregroundBlue)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.foregroundGreen)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.foregroundRed)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.backgroundBlue)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.backgroundGreen)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.backgroundRed)).BeginInit();
       this.SuspendLayout();
       // 
       // graphTarget
@@ -350,7 +356,7 @@
       this.tabPage2.Location = new System.Drawing.Point(4, 22);
       this.tabPage2.Name = "tabPage2";
       this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage2.Size = new System.Drawing.Size(589, 107);
+      this.tabPage2.Size = new System.Drawing.Size(636, 107);
       this.tabPage2.TabIndex = 1;
       this.tabPage2.Text = "Style";
       // 
@@ -436,7 +442,7 @@
       this.tabPage3.Controls.Add(this.confidenceInterval);
       this.tabPage3.Location = new System.Drawing.Point(4, 22);
       this.tabPage3.Name = "tabPage3";
-      this.tabPage3.Size = new System.Drawing.Size(589, 107);
+      this.tabPage3.Size = new System.Drawing.Size(636, 107);
       this.tabPage3.TabIndex = 2;
       this.tabPage3.Text = "Analytics";
       // 
@@ -453,7 +459,7 @@
       this.tabPage4.Controls.Add(this.label7);
       this.tabPage4.Location = new System.Drawing.Point(4, 22);
       this.tabPage4.Name = "tabPage4";
-      this.tabPage4.Size = new System.Drawing.Size(589, 107);
+      this.tabPage4.Size = new System.Drawing.Size(636, 107);
       this.tabPage4.TabIndex = 3;
       this.tabPage4.Text = "Aesthetics";
       // 
@@ -480,46 +486,137 @@
       this.dpiTicker.Value = 150;
       this.dpiTicker.Scroll += new System.EventHandler(this.FlagForRender);
       // 
-      // dataFeatures
+      // tabPage1
       // 
-      this.dataFeatures.Enabled = false;
-      this.dataFeatures.FormattingEnabled = true;
-      this.dataFeatures.Location = new System.Drawing.Point(15, 49);
-      this.dataFeatures.Name = "dataFeatures";
-      this.dataFeatures.Size = new System.Drawing.Size(163, 109);
-      this.dataFeatures.TabIndex = 13;
-      this.dataFeatures.SelectedIndexChanged += new System.EventHandler(this.FlagForRender);
+      this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
+      this.tabPage1.Controls.Add(this.foregroundBlue);
+      this.tabPage1.Controls.Add(this.foregroundGreen);
+      this.tabPage1.Controls.Add(this.foregroundRed);
+      this.tabPage1.Controls.Add(this.label16);
+      this.tabPage1.Controls.Add(this.label15);
+      this.tabPage1.Controls.Add(this.label14);
+      this.tabPage1.Controls.Add(this.backgroundBlue);
+      this.tabPage1.Controls.Add(this.label12);
+      this.tabPage1.Controls.Add(this.paletteSelector);
+      this.tabPage1.Controls.Add(this.label10);
+      this.tabPage1.Controls.Add(this.colorizeCheck);
+      this.tabPage1.Controls.Add(this.label13);
+      this.tabPage1.Controls.Add(this.backgroundGreen);
+      this.tabPage1.Controls.Add(this.backgroundRed);
+      this.tabPage1.Location = new System.Drawing.Point(4, 22);
+      this.tabPage1.Name = "tabPage1";
+      this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+      this.tabPage1.Size = new System.Drawing.Size(636, 107);
+      this.tabPage1.TabIndex = 4;
+      this.tabPage1.Text = "Color";
       // 
-      // saveScriptDialog
+      // foregroundBlue
       // 
-      this.saveScriptDialog.DefaultExt = "png";
-      this.saveScriptDialog.Filter = "R Script|*.r";
-      this.saveScriptDialog.Title = "Save Rendering Script";
+      this.foregroundBlue.Location = new System.Drawing.Point(285, 80);
+      this.foregroundBlue.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+      this.foregroundBlue.Name = "foregroundBlue";
+      this.foregroundBlue.Size = new System.Drawing.Size(73, 20);
+      this.foregroundBlue.TabIndex = 21;
+      this.foregroundBlue.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+      this.foregroundBlue.ValueChanged += new System.EventHandler(this.FlagForRender);
       // 
-      // openScriptDialog
+      // foregroundGreen
       // 
-      this.openScriptDialog.Filter = "R Script|*.r";
-      this.openScriptDialog.Title = "Execute R Script on Workspace";
+      this.foregroundGreen.Location = new System.Drawing.Point(285, 54);
+      this.foregroundGreen.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+      this.foregroundGreen.Name = "foregroundGreen";
+      this.foregroundGreen.Size = new System.Drawing.Size(73, 20);
+      this.foregroundGreen.TabIndex = 20;
+      this.foregroundGreen.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+      this.foregroundGreen.ValueChanged += new System.EventHandler(this.FlagForRender);
       // 
-      // colorizeCheck
+      // foregroundRed
       // 
-      this.colorizeCheck.AutoSize = true;
-      this.colorizeCheck.Location = new System.Drawing.Point(12, 9);
-      this.colorizeCheck.Name = "colorizeCheck";
-      this.colorizeCheck.Size = new System.Drawing.Size(63, 17);
-      this.colorizeCheck.TabIndex = 7;
-      this.colorizeCheck.Text = "Colorize";
-      this.colorizeCheck.UseVisualStyleBackColor = true;
-      this.colorizeCheck.CheckedChanged += new System.EventHandler(this.FlagForRender);
+      this.foregroundRed.Location = new System.Drawing.Point(285, 28);
+      this.foregroundRed.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+      this.foregroundRed.Name = "foregroundRed";
+      this.foregroundRed.Size = new System.Drawing.Size(73, 20);
+      this.foregroundRed.TabIndex = 19;
+      this.foregroundRed.Value = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+      this.foregroundRed.ValueChanged += new System.EventHandler(this.FlagForRender);
       // 
-      // label10
+      // label16
       // 
-      this.label10.AutoSize = true;
-      this.label10.Location = new System.Drawing.Point(12, 30);
-      this.label10.Name = "label10";
-      this.label10.Size = new System.Drawing.Size(45, 13);
-      this.label10.TabIndex = 9;
-      this.label10.Text = "Palettes";
+      this.label16.AutoSize = true;
+      this.label16.Location = new System.Drawing.Point(282, 9);
+      this.label16.Name = "label16";
+      this.label16.Size = new System.Drawing.Size(61, 13);
+      this.label16.TabIndex = 18;
+      this.label16.Text = "Foreground";
+      // 
+      // label15
+      // 
+      this.label15.AutoSize = true;
+      this.label15.Location = new System.Drawing.Point(248, 82);
+      this.label15.Name = "label15";
+      this.label15.Size = new System.Drawing.Size(28, 13);
+      this.label15.TabIndex = 17;
+      this.label15.Text = "Blue";
+      // 
+      // label14
+      // 
+      this.label14.AutoSize = true;
+      this.label14.Location = new System.Drawing.Point(248, 56);
+      this.label14.Name = "label14";
+      this.label14.Size = new System.Drawing.Size(36, 13);
+      this.label14.TabIndex = 16;
+      this.label14.Text = "Green";
+      // 
+      // backgroundBlue
+      // 
+      this.backgroundBlue.Location = new System.Drawing.Point(165, 80);
+      this.backgroundBlue.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+      this.backgroundBlue.Name = "backgroundBlue";
+      this.backgroundBlue.Size = new System.Drawing.Size(73, 20);
+      this.backgroundBlue.TabIndex = 14;
+      this.backgroundBlue.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+      this.backgroundBlue.ValueChanged += new System.EventHandler(this.FlagForRender);
+      // 
+      // label12
+      // 
+      this.label12.AutoSize = true;
+      this.label12.Location = new System.Drawing.Point(162, 9);
+      this.label12.Name = "label12";
+      this.label12.Size = new System.Drawing.Size(65, 13);
+      this.label12.TabIndex = 11;
+      this.label12.Text = "Background";
       // 
       // paletteSelector
       // 
@@ -571,88 +668,34 @@
       this.paletteSelector.TabIndex = 8;
       this.paletteSelector.SelectedIndexChanged += new System.EventHandler(this.FlagForRender);
       // 
-      // label12
+      // label10
       // 
-      this.label12.AutoSize = true;
-      this.label12.Location = new System.Drawing.Point(162, 9);
-      this.label12.Name = "label12";
-      this.label12.Size = new System.Drawing.Size(65, 13);
-      this.label12.TabIndex = 11;
-      this.label12.Text = "Background";
+      this.label10.AutoSize = true;
+      this.label10.Location = new System.Drawing.Point(12, 30);
+      this.label10.Name = "label10";
+      this.label10.Size = new System.Drawing.Size(45, 13);
+      this.label10.TabIndex = 9;
+      this.label10.Text = "Palettes";
       // 
-      // backgroundBlue
+      // colorizeCheck
       // 
-      this.backgroundBlue.Location = new System.Drawing.Point(165, 80);
-      this.backgroundBlue.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-      this.backgroundBlue.Name = "backgroundBlue";
-      this.backgroundBlue.Size = new System.Drawing.Size(73, 20);
-      this.backgroundBlue.TabIndex = 14;
-      this.backgroundBlue.Value = new decimal(new int[] {
-            155,
-            0,
-            0,
-            0});
-      this.backgroundBlue.ValueChanged += new System.EventHandler(this.FlagForRender);
+      this.colorizeCheck.AutoSize = true;
+      this.colorizeCheck.Location = new System.Drawing.Point(12, 9);
+      this.colorizeCheck.Name = "colorizeCheck";
+      this.colorizeCheck.Size = new System.Drawing.Size(63, 17);
+      this.colorizeCheck.TabIndex = 7;
+      this.colorizeCheck.Text = "Colorize";
+      this.colorizeCheck.UseVisualStyleBackColor = true;
+      this.colorizeCheck.CheckedChanged += new System.EventHandler(this.FlagForRender);
       // 
-      // label14
+      // label13
       // 
-      this.label14.AutoSize = true;
-      this.label14.Location = new System.Drawing.Point(248, 56);
-      this.label14.Name = "label14";
-      this.label14.Size = new System.Drawing.Size(36, 13);
-      this.label14.TabIndex = 16;
-      this.label14.Text = "Green";
-      // 
-      // label15
-      // 
-      this.label15.AutoSize = true;
-      this.label15.Location = new System.Drawing.Point(248, 82);
-      this.label15.Name = "label15";
-      this.label15.Size = new System.Drawing.Size(28, 13);
-      this.label15.TabIndex = 17;
-      this.label15.Text = "Blue";
-      // 
-      // tabPage1
-      // 
-      this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
-      this.tabPage1.Controls.Add(this.label15);
-      this.tabPage1.Controls.Add(this.label14);
-      this.tabPage1.Controls.Add(this.backgroundBlue);
-      this.tabPage1.Controls.Add(this.label12);
-      this.tabPage1.Controls.Add(this.paletteSelector);
-      this.tabPage1.Controls.Add(this.label10);
-      this.tabPage1.Controls.Add(this.colorizeCheck);
-      this.tabPage1.Controls.Add(this.label13);
-      this.tabPage1.Controls.Add(this.backgroundGreen);
-      this.tabPage1.Controls.Add(this.backgroundRed);
-      this.tabPage1.Location = new System.Drawing.Point(4, 22);
-      this.tabPage1.Name = "tabPage1";
-      this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-      this.tabPage1.Size = new System.Drawing.Size(636, 107);
-      this.tabPage1.TabIndex = 4;
-      this.tabPage1.Text = "Color";
-      // 
-      // backgroundRed
-      // 
-      this.backgroundRed.Location = new System.Drawing.Point(165, 28);
-      this.backgroundRed.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-      this.backgroundRed.Name = "backgroundRed";
-      this.backgroundRed.Size = new System.Drawing.Size(73, 20);
-      this.backgroundRed.TabIndex = 12;
-      this.backgroundRed.Value = new decimal(new int[] {
-            155,
-            0,
-            0,
-            0});
-      this.backgroundRed.ValueChanged += new System.EventHandler(this.FlagForRender);
+      this.label13.AutoSize = true;
+      this.label13.Location = new System.Drawing.Point(248, 30);
+      this.label13.Name = "label13";
+      this.label13.Size = new System.Drawing.Size(27, 13);
+      this.label13.TabIndex = 15;
+      this.label13.Text = "Red";
       // 
       // backgroundGreen
       // 
@@ -666,20 +709,50 @@
       this.backgroundGreen.Size = new System.Drawing.Size(73, 20);
       this.backgroundGreen.TabIndex = 13;
       this.backgroundGreen.Value = new decimal(new int[] {
-            155,
+            255,
             0,
             0,
             0});
       this.backgroundGreen.ValueChanged += new System.EventHandler(this.FlagForRender);
       // 
-      // label13
+      // backgroundRed
       // 
-      this.label13.AutoSize = true;
-      this.label13.Location = new System.Drawing.Point(248, 30);
-      this.label13.Name = "label13";
-      this.label13.Size = new System.Drawing.Size(27, 13);
-      this.label13.TabIndex = 15;
-      this.label13.Text = "Red";
+      this.backgroundRed.Location = new System.Drawing.Point(165, 28);
+      this.backgroundRed.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+      this.backgroundRed.Name = "backgroundRed";
+      this.backgroundRed.Size = new System.Drawing.Size(73, 20);
+      this.backgroundRed.TabIndex = 12;
+      this.backgroundRed.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+      this.backgroundRed.ValueChanged += new System.EventHandler(this.FlagForRender);
+      // 
+      // dataFeatures
+      // 
+      this.dataFeatures.Enabled = false;
+      this.dataFeatures.FormattingEnabled = true;
+      this.dataFeatures.Location = new System.Drawing.Point(15, 49);
+      this.dataFeatures.Name = "dataFeatures";
+      this.dataFeatures.Size = new System.Drawing.Size(163, 109);
+      this.dataFeatures.TabIndex = 13;
+      this.dataFeatures.SelectedIndexChanged += new System.EventHandler(this.FlagForRender);
+      // 
+      // saveScriptDialog
+      // 
+      this.saveScriptDialog.DefaultExt = "png";
+      this.saveScriptDialog.Filter = "R Script|*.r";
+      this.saveScriptDialog.Title = "Save Rendering Script";
+      // 
+      // openScriptDialog
+      // 
+      this.openScriptDialog.Filter = "R Script|*.r";
+      this.openScriptDialog.Title = "Execute R Script on Workspace";
       // 
       // Form1
       // 
@@ -711,11 +784,14 @@
       this.tabPage4.ResumeLayout(false);
       this.tabPage4.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dpiTicker)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.backgroundBlue)).EndInit();
       this.tabPage1.ResumeLayout(false);
       this.tabPage1.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.backgroundRed)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.foregroundBlue)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.foregroundGreen)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.foregroundRed)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.backgroundBlue)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.backgroundGreen)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.backgroundRed)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -743,7 +819,6 @@
     private System.Windows.Forms.TextBox titleText;
     private System.Windows.Forms.Label label8;
     private System.Windows.Forms.SaveFileDialog saveImageDialog;
-    private System.Windows.Forms.ColorDialog colorDialog1;
     private System.Windows.Forms.TabControl tabControl1;
     private System.Windows.Forms.TabPage tabPage3;
     private System.Windows.Forms.TabPage tabPage4;
@@ -775,6 +850,10 @@
     private System.Windows.Forms.Label label13;
     private System.Windows.Forms.NumericUpDown backgroundGreen;
     private System.Windows.Forms.NumericUpDown backgroundRed;
+    private System.Windows.Forms.NumericUpDown foregroundBlue;
+    private System.Windows.Forms.NumericUpDown foregroundGreen;
+    private System.Windows.Forms.NumericUpDown foregroundRed;
+    private System.Windows.Forms.Label label16;
   }
 }
 

@@ -186,8 +186,10 @@ namespace Conduct_R
 
       // Add Aesthetics
       string backgroundHex = string.Format("#{0:X2}{1:X2}{2:X2}", (int)backgroundRed.Value, (int)backgroundGreen.Value, (int)backgroundBlue.Value);
+      string foregroundHex = string.Format("#{0:X2}{1:X2}{2:X2}", (int)foregroundRed.Value, (int)foregroundGreen.Value, (int)foregroundBlue.Value);
       graphCommand += "p <- p + labs(x=\"" + xLabel.Text + "\",y=\"" + yLabel.Text + "\")\n";
       graphCommand += "p <- p + theme(plot.background = element_rect(fill = '" + backgroundHex + "'))\n";
+      graphCommand += "p <- p + theme(panel.background = element_rect(fill = '" + foregroundHex + "'))\n";
       if (!string.IsNullOrEmpty(titleText.Text))
       {
         graphCommand += "p <- p + ggtitle(\"" + titleText.Text + "\")\n";
