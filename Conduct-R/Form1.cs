@@ -128,9 +128,9 @@ namespace Conduct_R
       {
         if (confidenceInterval.Checked)
         {
-          graphCommand += "p <- p + geom_smooth(data=impData, aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.99, alpha=0.25, linetype=0)\n";
-          graphCommand += "p <- p + geom_smooth(data=impData, aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.95, alpha=0.25, linetype=0)\n";
-          graphCommand += "p <- p + geom_smooth(data=impData, aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.68, alpha=0.25, linetype=0)\n";
+          graphCommand += "p <- p + geom_smooth(data=impData, aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.99, alpha=0.30, linetype=0)\n";
+          graphCommand += "p <- p + geom_smooth(data=impData, aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.95, alpha=0.30, linetype=0)\n";
+          graphCommand += "p <- p + geom_smooth(data=impData, aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.68, alpha=0.30, linetype=0)\n";
         }
 
       }
