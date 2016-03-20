@@ -84,6 +84,7 @@
       this.dataFeatures = new System.Windows.Forms.CheckedListBox();
       this.saveScriptDialog = new System.Windows.Forms.SaveFileDialog();
       this.openScriptDialog = new System.Windows.Forms.OpenFileDialog();
+      this.densityPlot = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.graphTarget)).BeginInit();
       this.menuStrip1.SuspendLayout();
       this.tabControl1.SuspendLayout();
@@ -220,7 +221,7 @@
       // trendLine
       // 
       this.trendLine.AutoSize = true;
-      this.trendLine.Location = new System.Drawing.Point(297, 26);
+      this.trendLine.Location = new System.Drawing.Point(285, 28);
       this.trendLine.Name = "trendLine";
       this.trendLine.Size = new System.Drawing.Size(77, 17);
       this.trendLine.TabIndex = 7;
@@ -436,6 +437,7 @@
       // tabPage3
       // 
       this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
+      this.tabPage3.Controls.Add(this.densityPlot);
       this.tabPage3.Controls.Add(this.trendLine);
       this.tabPage3.Controls.Add(this.modelSelect);
       this.tabPage3.Controls.Add(this.label5);
@@ -754,6 +756,17 @@
       this.openScriptDialog.Filter = "R Script|*.r";
       this.openScriptDialog.Title = "Execute R Script on Workspace";
       // 
+      // densityPlot
+      // 
+      this.densityPlot.AutoSize = true;
+      this.densityPlot.Location = new System.Drawing.Point(368, 28);
+      this.densityPlot.Name = "densityPlot";
+      this.densityPlot.Size = new System.Drawing.Size(82, 17);
+      this.densityPlot.TabIndex = 8;
+      this.densityPlot.Text = "Density Plot";
+      this.densityPlot.UseVisualStyleBackColor = true;
+      this.densityPlot.CheckedChanged += new System.EventHandler(this.FlagForRender);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -854,6 +867,7 @@
     private System.Windows.Forms.NumericUpDown foregroundGreen;
     private System.Windows.Forms.NumericUpDown foregroundRed;
     private System.Windows.Forms.Label label16;
+    private System.Windows.Forms.CheckBox densityPlot;
   }
 }
 

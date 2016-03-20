@@ -132,8 +132,13 @@ namespace Conduct_R
           graphCommand += "p <- p + geom_smooth(data=impData, aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.95, alpha=0.25, linetype=0)\n";
           graphCommand += "p <- p + geom_smooth(data=impData, aes(y=" + item + ", x=" + GetSequence() + ")," + GetModel() + " level=0.68, alpha=0.25, linetype=0)\n";
         }
+
       }
 
+      if (densityPlot.Checked)
+      {
+        graphCommand += "p <- p + geom_density2d(aes(y=value, x=" + GetSequence() + ", colour=variable))\n";
+      }
 
       if (graphDesign.Text.Equals("Scatter", StringComparison.InvariantCultureIgnoreCase))
       {
