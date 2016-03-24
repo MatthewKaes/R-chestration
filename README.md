@@ -12,3 +12,8 @@ R-Chestration is built as an expansion library to R.net which enables easy loggi
 Conduct-R is inboxed rendering software built on R-Chestrator to provide easy data manipulation and visualization in a user friendly GUI environment. Common data analysis methods are made possible in a few button clicks to enable faster iteration on data and feature analysis.
 
 ![Current Setup](img/Conduct-R-1.png?raw=true)
+
+##Requirements
+[R 3.2.2 or above](https://cran.r-project.org/bin/windows/base/old/3.2.2/)
+
+C# 4.0
